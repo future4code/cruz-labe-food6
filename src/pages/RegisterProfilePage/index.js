@@ -6,7 +6,40 @@ import {Container, InputContainer, RegisterButtonContainer, P, Img, ButtonEats} 
 import { goToRegisterProfile } from 'routes/coordinator';
 import logo from '../../assets/logo.png'
 
+
 function RegisterProfilePage() {
+
+    const registerProfileForm = {
+      name: "",
+      email: "",
+      cpf: "",
+      password: "",
+      confirmPassWord: ""
+    }
+
+    const history = useHistory()
+    const [form, handleInputChange] = useForm(registerProfileForm)
+
+    const createProfile = (event) => {
+      event.preventDefault()
+      if (form.password === form.confirmPassWord) {
+
+        const body = {...form}
+        delete body.confirmPassWord
+
+        labefood.signup(body)
+        .then(res => { 
+          window.localStorage.setItem("token", res.token) 
+          goToRegisterAdress(history)})
+        .catch( err => {alert(err.response.data.message)})
+
+      }
+      else {
+        alert("As senhas devem ser idênticas")
+      }
+
+    }
+
     return (
       <Container>
       <Img src={logo}/>
@@ -15,9 +48,9 @@ function RegisterProfilePage() {
           <form  //onSubmit={onSubmitForm}
           >
               <TextField
-                  name={'nome'}
+                  name={'name'}
                   //value={}
-                  //onChange={onChange}
+                  onChange={handleInputChange}
                   label={"Nome"}
                   placeholder={'Nome Completo'}
                   variant={'outlined'}
@@ -31,7 +64,7 @@ function RegisterProfilePage() {
               <TextField
                   name={'email'}
                   //value={}
-                  //onChange={onChange}
+                  onChange={handleInputChange}
                   label={"E-mail"}
                   placeholder={'email@email.com'}
                   variant={'outlined'}
@@ -43,7 +76,7 @@ function RegisterProfilePage() {
                      <TextField
                   name={'cpf'}
                   //value={}
-                  //onChange={onChange}
+                  onChange={handleInputChange}
                   label={"CPF"}
                   placeholder={'000.000.000-00'}
                   variant={'outlined'}
@@ -65,9 +98,9 @@ function RegisterProfilePage() {
                   type={'password'}
               />
                      <TextField
-                  name={'password'}
+                  name={'confirmPassWord'}
                   //value={}
-                  //onChange={onChange}
+                  onChange={handleInputChange}
                   label={"Confirmar senha"}
                   placeholder={'Confirme a senha anterior'}
                   variant={'outlined'}

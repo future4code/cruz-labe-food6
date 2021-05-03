@@ -4,16 +4,31 @@ import { Button, TextField } from '@material-ui/core';
 import {Container, InputContainer, P, ButtonEats} from './styled'
 
 function RegisterAdressPage() {
+  const registerAdressForm = {
+    street: "",
+    number: "",
+    neighbourhood: "",
+    city: "",
+    state: "",
+    complement: ""
+  }
+
+  const history = useHistory()
+  const [form, handleInputChange] = useForm(registerAdressForm)
+
+  const createAdress = (event) => {
+    event.preventDefault()
+  }
+  
     return (
       <Container>
       <P>Meu Endereço</P>
       <InputContainer>
-          <form  //onSubmit={onSubmitForm}
-          >
+          <form  onSubmit={createAdress}
               <TextField
-                  name={'logradouro'}
+                  name={'street'}
                   //value={}
-                  //onChange={onChange}
+                  onChange={handleInputChange}
                   label={"Logradouro"}
                   placeholder={'Rua / AV'}
                   variant={'outlined'}
@@ -25,9 +40,9 @@ function RegisterAdressPage() {
               />
 
               <TextField
-                  name={'numero'}
+                  name={'number'}
                   //value={}
-                  //onChange={onChange}
+                  onChange={handleInputChange}
                   label={"Número"}
                   placeholder={'Número'}
                   variant={'outlined'}
@@ -38,9 +53,9 @@ function RegisterAdressPage() {
               />
 
                   <TextField
-                  name={'complemento'}
+                  name={'complement'}
                   //value={}
-                  //onChange={onChange}
+                  onChange={handleInputChange}
                   label={"Complemento"}
                   placeholder={'Apto / Bloco'}
                   variant={'outlined'}
@@ -49,10 +64,11 @@ function RegisterAdressPage() {
                   required
                   type={'text'}
               />
+    
               <TextField
-                  name={'bairro'}
+                  name={'neighbourhood'}
                   //value={}
-                  //onChange={onChange}
+                  onChange={handleInputChange}
                   label={"Bairro"}
                   placeholder={'Bairro'}
                   variant={'outlined'}
@@ -61,10 +77,11 @@ function RegisterAdressPage() {
                   required
                   type={'text'}
               />
+     
               <TextField
-                  name={'cidade'}
+                  name={'city'}
                   //value={}
-                  //onChange={onChange}
+                  onChange={handleInputChange}
                   label={"Cidade"}
                   placeholder={'Cidade'}
                   variant={'outlined'}
@@ -74,9 +91,9 @@ function RegisterAdressPage() {
                   type={'text'}
               />
               <TextField
-                  name={'estado'}
+                  name={'state'}
                   //value={}
-                  //onChange={onChange}
+                  onChange={handleInputChange}
                   label={"Estado"}
                   placeholder={'Estado'}
                   variant={'outlined'}
@@ -98,7 +115,7 @@ function RegisterAdressPage() {
           </form>
       </InputContainer>
   </Container>
-    )
-  }
+   ) 
+}
   
-  export default RegisterAdressPage;
+export default RegisterAdressPage;
