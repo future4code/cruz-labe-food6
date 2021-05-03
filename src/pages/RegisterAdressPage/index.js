@@ -1,12 +1,13 @@
 import axios from 'axios'
 import React from 'react'
-import { useHistory } from 'react-router'
 import useForm from '../../hooks/useForm'
+
+import { Button, TextField } from '@material-ui/core';
+import {Container, InputContainer, P, ButtonEats} from './styled'
+
 import { goToHome } from '../../routes/coordinator'
-import labefood from '../../services/labefood'
 
 function RegisterAdressPage() {
-
   const registerAdressForm = {
     street: "",
     number: "",
@@ -14,7 +15,7 @@ function RegisterAdressPage() {
     city: "",
     state: "",
     complement: ""
-}
+  }
 
   const history = useHistory()
   const [form, handleInputChange] = useForm(registerAdressForm)
@@ -34,21 +35,103 @@ function RegisterAdressPage() {
       console.log(err)
     })
   }
+  
+    return (
+      <Container>
+      <P>Meu Endereço</P>
+      <InputContainer>
+          <form  onSubmit={createAdress}
+              <TextField
+                  name={'street'}
+                  //value={}
+                  onChange={handleInputChange}
+                  label={"Logradouro"}
+                  placeholder={'Rua / AV'}
+                  variant={'outlined'}
+                  fullWidth
+                  margin={'normal'}
+                  autoFocus
+                  required
+                  type={'text'}
+              />
 
-  return (
-    <div>
-      <h1>RegisterAdressPage</h1>
-      <form onSubmit={createAdress}>
-        <input name="street" type="text" placeholder="logradouro" onChange={handleInputChange} required/>
-        <input name="number" type="number" placeholder="número" onChange={handleInputChange} required/>
-        <input name="complement" type="text" placeholder="complemento" onChange={handleInputChange} required/>
-        <input name="neighbourhood" type="text" placeholder="bairro" onChange={handleInputChange} required/>
-        <input name="city" type="text" placeholder="cidade" onChange={handleInputChange} required/>
-        <input name="state" type="text" placeholder="estado" onChange={handleInputChange} required/>
-        <button>Salvar</button>
-      </form>
-    </div>
-  )
+              <TextField
+                  name={'number'}
+                  //value={}
+                  onChange={handleInputChange}
+                  label={"Número"}
+                  placeholder={'Número'}
+                  variant={'outlined'}
+                  fullWidth
+                  margin={'normal'}
+                  required
+                  type={'number'}
+              />
+
+                  <TextField
+                  name={'complement'}
+                  //value={}
+                  onChange={handleInputChange}
+                  label={"Complemento"}
+                  placeholder={'Apto / Bloco'}
+                  variant={'outlined'}
+                  fullWidth
+                  margin={'normal'}
+                  required
+                  type={'text'}
+              />
+    
+              <TextField
+                  name={'neighbourhood'}
+                  //value={}
+                  onChange={handleInputChange}
+                  label={"Bairro"}
+                  placeholder={'Bairro'}
+                  variant={'outlined'}
+                  fullWidth
+                  margin={'normal'}
+                  required
+                  type={'text'}
+              />
+     
+              <TextField
+                  name={'city'}
+                  //value={}
+                  onChange={handleInputChange}
+                  label={"Cidade"}
+                  placeholder={'Cidade'}
+                  variant={'outlined'}
+                  fullWidth
+                  margin={'normal'}
+                  required
+                  type={'text'}
+              />
+              <TextField
+                  name={'state'}
+                  //value={}
+                  onChange={handleInputChange}
+                  label={"Estado"}
+                  placeholder={'Estado'}
+                  variant={'outlined'}
+                  fullWidth
+                  margin={'normal'}
+                  required
+                  type={'text'}
+              />
+
+              <ButtonEats
+              type={'submit'}
+              fullWidth
+              variant={'contained'}
+              color={'primary'}
+              margin={'normal'}
+              >
+                  <P>Salvar</P>
+              </ButtonEats>
+          </form>
+      </InputContainer>
+  </Container>
+   ) 
 }
   
-  export default RegisterAdressPage;
+export default RegisterAdressPage;
