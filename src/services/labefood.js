@@ -63,7 +63,7 @@ const getRestaurants = (token) => {
   return request.then((response) => response.data);
 };
 
-const getRestaurantDetail = (token) => {
+const getRestaurantDetail = (token, id) => {
   const request = axios.get(`/restaurants/${id}`, {
     headers: {
       auth: token,
@@ -73,7 +73,7 @@ const getRestaurantDetail = (token) => {
   return request.then((response) => response.data);
 };
 
-const placeOrder = (body, token) => {
+const placeOrder = (body, token, id) => {
   const request = axios.post(`/restaurants/${id}/order`, body, {
     headers: {
       auth: token,
