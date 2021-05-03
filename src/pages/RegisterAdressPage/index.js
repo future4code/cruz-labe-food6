@@ -1,7 +1,11 @@
+import axios from 'axios'
 import React from 'react'
 import useForm from '../../hooks/useForm'
+
 import { Button, TextField } from '@material-ui/core';
 import {Container, InputContainer, P, ButtonEats} from './styled'
+
+import { goToHome } from '../../routes/coordinator'
 
 function RegisterAdressPage() {
   const registerAdressForm = {
@@ -17,7 +21,19 @@ function RegisterAdressPage() {
   const [form, handleInputChange] = useForm(registerAdressForm)
 
   const createAdress = (event) => {
+
     event.preventDefault()
+
+    const token = window.localStorage.getItem("token")
+    
+    labefood.addAddress(form, token)
+    .then(res => {
+      window.localStorage.setItem("token", res.token)
+      goToHome(history)
+    })
+    .catch( err => {
+      console.log(err)
+    })
   }
   
     return (
