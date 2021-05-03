@@ -11,7 +11,7 @@ import {
   RegisterAdressPage,
   RestaurantPage,
   SearchPage,
-} from "../pages/";
+} from "pages/";
 
 function Router() {
   return (
