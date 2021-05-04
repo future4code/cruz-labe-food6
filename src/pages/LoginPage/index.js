@@ -16,17 +16,16 @@ import { useHistory } from 'react-router';
 import useUnprotectedPage from 'hooks/useUnprotectedPage';
 
 function LoginPage() {
-  useUnprotectedPage();
-
-  const history = useHistory();
-  const [form, handleInputChange] = useForm({ email: '', password: '' });
-
-  const login = (e) => {
-    e.preventDefault();
-    labefood
-      .login(form)
-      .then((response) => {
-        localStorage.setItem('token', response.token);
+    useUnprotectedPage()
+    
+    const history = useHistory()
+    const [form, handleInputChange] = useForm({ email: '', password: ''})
+  
+    const login = (e) => {
+      e.preventDefault()
+      labefood.login(form)
+      .then((res) => {
+        window.localStorage.setItem("token", res.token)
         goToHome(history);
       })
       .catch((err) => {
