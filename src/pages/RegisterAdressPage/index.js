@@ -8,11 +8,11 @@ import labefood from 'services/labefood';
 
 import arrow from '../../assets/arrow.png'
 
-import useUnprotectedPage from 'hooks/useUnprotectedPage';
+import useProtectedPage from 'hooks/useProtectedPage';
 
 
 function RegisterAdressPage() {
-    useUnprotectedPage()
+    useProtectedPage()
 
     const registerAdressForm = {
         street: "",
@@ -83,7 +83,6 @@ function RegisterAdressPage() {
                   variant={'outlined'}
                   fullWidth
                   margin={'normal'}
-                  required
                   type={'text'}
               />
               <TextField
