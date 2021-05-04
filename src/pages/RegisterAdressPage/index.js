@@ -2,18 +2,48 @@ import React from 'react'
 import useForm from '../../hooks/useForm'
 import { Button, TextField } from '@material-ui/core';
 import {Container, InputContainer, P, ButtonEats} from './styled'
+import { goToHome } from 'routes/coordinator';
+import { useHistory } from 'react-router';
+import labefood from 'services/labefood';
 
 function RegisterAdressPage() {
+
+    const registerAdressForm = {
+        street: "",
+        number: "",
+        neighbourhood: "",
+        city: "",
+        state: "",
+        complement: ""
+      }
+    
+    const history = useHistory()
+    const [form, handleInputChange] = useForm(registerAdressForm)
+
+    const createAdress = (event) => {
+
+    event.preventDefault()
+
+    const token = window.localStorage.getItem("token")
+
+    labefood.addAddress(form, token)
+    .then(res => {
+        window.localStorage.setItem("token", res.token)
+        goToHome(history)
+    })
+    .catch( err => {
+        console.log(err)
+    })
+    }
+
     return (
       <Container>
       <P>Meu Endereço</P>
       <InputContainer>
-          <form  //onSubmit={onSubmitForm}
-          >
+          <form  onSubmit={createAdress}>
               <TextField
-                  name={'logradouro'}
-                  //value={}
-                  //onChange={onChange}
+                  name={'street'}
+                  onChange={handleInputChange}
                   label={"Logradouro"}
                   placeholder={'Rua / AV'}
                   variant={'outlined'}
@@ -25,9 +55,8 @@ function RegisterAdressPage() {
               />
 
               <TextField
-                  name={'numero'}
-                  //value={}
-                  //onChange={onChange}
+                  name={'number'}
+                  onChange={handleInputChange}
                   label={"Número"}
                   placeholder={'Número'}
                   variant={'outlined'}
@@ -38,9 +67,8 @@ function RegisterAdressPage() {
               />
 
                   <TextField
-                  name={'complemento'}
-                  //value={}
-                  //onChange={onChange}
+                  name={'complement'}
+                  onChange={handleInputChange}
                   label={"Complemento"}
                   placeholder={'Apto / Bloco'}
                   variant={'outlined'}
@@ -50,9 +78,8 @@ function RegisterAdressPage() {
                   type={'text'}
               />
               <TextField
-                  name={'bairro'}
-                  //value={}
-                  //onChange={onChange}
+                  name={'neighbourhood'}
+                  onChange={handleInputChange}
                   label={"Bairro"}
                   placeholder={'Bairro'}
                   variant={'outlined'}
@@ -62,9 +89,8 @@ function RegisterAdressPage() {
                   type={'text'}
               />
               <TextField
-                  name={'cidade'}
-                  //value={}
-                  //onChange={onChange}
+                  name={'city'}
+                  onChange={handleInputChange}
                   label={"Cidade"}
                   placeholder={'Cidade'}
                   variant={'outlined'}
@@ -74,9 +100,8 @@ function RegisterAdressPage() {
                   type={'text'}
               />
               <TextField
-                  name={'estado'}
-                  //value={}
-                  //onChange={onChange}
+                  name={'state'}
+                  onChange={handleInputChange}
                   label={"Estado"}
                   placeholder={'Estado'}
                   variant={'outlined'}
