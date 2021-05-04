@@ -1,13 +1,11 @@
-import React from 'react'
+import React from 'react';
 import useProtectedPage from 'hooks/useProtectedPage';
+import labefood from 'services/labefood';
 
 function RestaurantPage() {
+  useProtectedPage();
 
-  useProtectedPage()
+  return <h1>RestaurantPage</h1>;
+}
 
-  return (
-      <h1>RestaurantPage</h1>
-    )
-  }
-  
-  export default RestaurantPage;
+export default RestaurantPage;
