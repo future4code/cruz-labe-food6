@@ -4,6 +4,7 @@ import labefood from 'services/labefood';
 import CardHistoric from 'components/CardHistorico';
 import { goToEditAdress, goToEditProfile } from 'routes/coordinator';
 import { useHistory } from 'react-router';
+import Footer from 'components/Footer';
 
 function ProfilePage() {
   
@@ -56,6 +57,7 @@ function ProfilePage() {
       }
       {}
       {!user && <h1>Loading</h1>}
+      <Footer/>
     </div>)
   }
   
