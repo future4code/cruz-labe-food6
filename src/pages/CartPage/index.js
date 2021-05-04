@@ -1,8 +1,14 @@
 import React from 'react'
+import {Container, P, Header} from './styled'
 
 function CartPage() {
     return (
-      <h1>CartPage</h1>
+      <Container>
+      <Header>
+          <P>Meu Carrinho</P>
+      </Header>
+      
+    </Container>
     )
   }
   

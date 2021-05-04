@@ -1,11 +1,15 @@
 import React from 'react'
+import {Container, P, Header} from './styled'
 
 function HomePage() {
 
     return (
-      <div>
-        <h1>HomePage</h1>
-      </div>
+      <Container>
+        <Header>
+            <P>FutureEats</P>
+        </Header>
+        
+      </Container>
     )
   }
 

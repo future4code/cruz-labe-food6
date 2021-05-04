@@ -6,7 +6,6 @@ display: flex;
 flex-direction: column;
 align-items: center;
 width: 100vw;
-margin-top: 10vh;
 font-family: Roboto, sans-serif;
 
 `
@@ -31,6 +30,7 @@ margin-bottom: 20px;
 export const P = styled.p `
 color: black;
 font-weight: bold;
+text-align: center;
 `
 
 export const ButtonEats = styled(Button) `
@@ -45,4 +45,18 @@ export const ButtonEats = styled(Button) `
   letter-spacing: -0.39px;
   text-align: center;
   color: #000000;
+`
+
+export const Header = styled.div `
+display: flex;
+margin-top: 5px;
+width: 100vw;
+border-bottom: solid 1px #E8E8E8;
+
+img {
+  padding: 10px;
+}
+p {
+  margin-left: 33%;
+}
 `
