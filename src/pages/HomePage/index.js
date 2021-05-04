@@ -1,4 +1,4 @@
-import {Container, P, Header} from './styled'
+import { Container, P, Header } from './styled';
 import React, { useEffect, useState } from 'react';
 import labefood from 'services/labefood';
 import useProtectedPage from 'hooks/useProtectedPage';
@@ -10,32 +10,29 @@ function HomePage() {
   const [restaurants, setRestaurants] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState('Hamburguer');
   const [loading, setLoading] = useState(true);
+  const [categories, setCategories] = useState([]);
   const history = useHistory();
 
-  const categorias = [
-    'Hamburguer',
-    'Asiática',
-    'Massa',
-    'Saudaveis',
-    'Árabe',
-    'Italiana',
-    'Sorvetes',
-    'Carnes',
-    'Baiana',
-    'Petiscos',
-    'Mexicana',
-  ];
+  const filterCategories = (array) => {
+    let mappedCategories = array.map((restaurant) => restaurant.category);
+    let categoriesSet = new Set(mappedCategories);
+    return [...categoriesSet];
+  };
 
   useEffect(() => {
     const token = window.localStorage.getItem('token');
     labefood
       .getRestaurants(token)
       .then((response) => {
-        setRestaurants(response.restaurants);
-        setLoading(false);
+        const result = response.restaurants;
+        setRestaurants(result);
+        setCategories(filterCategories(result));
       })
       .catch((err) => {
-        console.log(err.response.data.message);
+        alert(err.response.data.message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 
@@ -60,13 +57,10 @@ function HomePage() {
       <h1>HomePage</h1>
       <input />
       <div>
-        {categorias.map((categoria) => {
+        {categories.map((category) => {
           return (
-            <button
-              key={categoria}
-              onClick={() => setCategoryFilter(categoria)}
-            >
-              {categoria}
+            <button key={category} onClick={() => setCategoryFilter(category)}>
+              {category}
             </button>
           );
         })}
