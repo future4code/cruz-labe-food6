@@ -3,8 +3,9 @@ import labefood from '../../services/labefood'
 import useForm from '../../hooks/useForm'
 import { Button, TextField } from '@material-ui/core';
 import {Container, InputContainer, RegisterButtonContainer, P, Img, ButtonEats} from './styled'
-import { goToRegisterProfile } from 'routes/coordinator';
+import { goToRegisterAdress } from 'routes/coordinator';
 import logo from '../../assets/logo.png'
+import {useHistory} from 'react-router-dom'
 
 
 function RegisterProfilePage() {
