@@ -2,9 +2,12 @@ import React from 'react'
 import useForm from '../../hooks/useForm'
 import { Button, TextField } from '@material-ui/core';
 import {Container, InputContainer, P, ButtonEats} from './styled'
+import useProtectedPage from 'hooks/useProtectedPage';
 
 
 function AdressEditPage() {
+    useProtectedPage()
+
     return (
       <Container>
       <P>Endereço</P>

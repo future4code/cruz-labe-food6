@@ -6,9 +6,12 @@ import {Container, InputContainer, RegisterButtonContainer, P, Img, ButtonEats} 
 import { goToRegisterAdress } from 'routes/coordinator';
 import logo from '../../assets/logo.png'
 import {useHistory} from 'react-router-dom'
+import useUnprotectedPage from 'hooks/useUnprotectedPage';
 
 
 function RegisterProfilePage() {
+
+    useUnprotectedPage()
 
     const registerProfileForm = {
       name: "",
