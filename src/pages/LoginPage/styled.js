@@ -6,6 +6,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 width: 100vw;
+height: 100%;
 margin-top: 10vh;
 font-family: Roboto, sans-serif;
 

@@ -1,9 +1,10 @@
-import { Container, P, Header } from './styled';
+import {Container, P, Header, ContainerCard, DivDetail, DivPrice, ImgDiv} from './styled'
 import React, { useEffect, useState } from 'react';
 import labefood from 'services/labefood';
 import useProtectedPage from 'hooks/useProtectedPage';
 import { goToHome, goToCart, goToProfile } from 'routes/coordinator';
 import { useHistory } from 'react-router-dom';
+import Footer from 'components/Footer';
 
 function HomePage() {
   useProtectedPage();
@@ -34,6 +35,7 @@ function HomePage() {
       .finally(() => {
         setLoading(false);
       });
+      setLoading(false);
   }, []);
 
   const mystyle = {
@@ -53,9 +55,11 @@ function HomePage() {
   }
 
   return (
-    <div>
-      <h1>HomePage</h1>
-      <input />
+    <Container>
+        <Header>
+        <P>FutureEats</P>
+        </Header>
+      <input placeholder={'Buscar'}/>
       <div>
         {categories.map((category) => {
           return (
@@ -68,25 +72,26 @@ function HomePage() {
 
       {filteredRestaurants?.map((restaurant) => {
         return (
-          <div
+          <ContainerCard
             key={restaurant.id}
-            style={mystyle}
             title={restaurant.description}
           >
-            <img width="300" src={restaurant.logoUrl} alt="restaurant" />
+            <ImgDiv>
+            <img src={restaurant.logoUrl} alt="restaurant" />
+            </ImgDiv>
+            <DivDetail>
             <p>{restaurant.name}</p>
+            <DivPrice>
             <p>{restaurant.deliveryTime} min</p>
             <p>Frete R${restaurant.shipping}</p>
-          </div>
+            </DivPrice>
+            </DivDetail>
+          </ContainerCard>
         );
       })}
 
-      <nav>
-        <button onClick={() => goToHome(history)}>Home</button>
-        <button onClick={() => goToCart(history)}>Cart</button>
-        <button onClick={() => goToProfile(history)}>Profile</button>
-      </nav>
-    </div>
+      <Footer/>
+    </Container>
   );
 }
 
