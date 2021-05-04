@@ -19,7 +19,8 @@ function LoginPage() {
     const login = (e) => {
       e.preventDefault()
       labefood.login(form)
-      .then((response) => {
+      .then((res) => {
+        window.localStorage.setItem("token", res.token)
         goToHome(history);
       }).catch((err) => {
         alert(err.response.data.message)
