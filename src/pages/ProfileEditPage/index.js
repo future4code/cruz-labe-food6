@@ -1,27 +1,54 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import useForm from '../../hooks/useForm'
 import { Button, TextField } from '@material-ui/core';
-
 import {Container, InputContainer, P, ButtonEats, Header} from './styled'
 import arrow from '../../assets/arrow.png'
-
 import useProtectedPage from 'hooks/useProtectedPage';
+import labefood from 'services/labefood';
+import { goToProfile } from 'routes/coordinator';
+import { useHistory } from 'react-router';
 
 function ProfileEditPage() {
-
+    
     useProtectedPage()
+    
+    const formDefault = {
+        name: "",
+        email: "",
+        cpf: "",
+    }
 
-    // const formDefault = {
-    //     "user": {
-    //             "id": "De8UACSFgFySnKdXm5hI",
-    //             "name": "Astrodev",
-    //             "email": "astrodev@future4.com",
-    //             "cpf": "111.111.111-11",
-    //             "hasAddress": true,
-    //             "address": "R. Afonso Braz, 177 - Vila N. Conceição" 
-    //     }
+    const history = useHistory()
+    const token = window.localStorage.getItem("token")
+    const [form, handleInputChange, resetForm, setForm] = useForm(formDefault)
 
-    const [form, handleInputChange] = useForm({})
+    useEffect(() => {
+        requestProfile()
+    }, [])
+
+    const requestProfile = () => {
+        labefood.getProfile(token)
+        .then(res => {
+            setForm({name: res.user.name, email: res.user.email, cpf: res.user.cpf})
+        })
+        .catch( err => {
+            console.log(err)
+        })
+    }
+
+    const editProfile = (event) => {
+        event.preventDefault()
+        labefood.updateProfile(form, token)
+        .then((res) => {
+            alert("Modificado com sucesso!")
+            console.log(res)
+            goToProfile(history)
+        })
+        .catch((err) => {
+            alert("Erro ao modificar")
+            console.log(err)
+        })
+    }
 
     return (
       <Container>
@@ -31,12 +58,11 @@ function ProfileEditPage() {
         </Header>
       
       <InputContainer>
-          <form  //onSubmit={onSubmitForm}
-          >
+          <form onSubmit={editProfile}>
               <TextField
-                  name={'nome'}
+                  name={'name'}
                   value={form.name}
-                  //onChange={onChange}
+                  onChange={handleInputChange}
                   label={"Nome"}
                   placeholder={'Nome Completo'}
                   variant={'outlined'}
@@ -50,7 +76,7 @@ function ProfileEditPage() {
               <TextField
                   name={'email'}
                   value={form.email}
-                  //onChange={onChange}
+                  onChange={handleInputChange}
                   label={"E-mail"}
                   placeholder={'email@email.com'}
                   variant={'outlined'}
@@ -62,14 +88,14 @@ function ProfileEditPage() {
                      <TextField
                   name={'cpf'}
                   value={form.cpf}
-                  //onChange={onChange}
+                  onChange={handleInputChange}
                   label={"CPF"}
                   placeholder={'000.000.000-00'}
                   variant={'outlined'}
                   fullWidth
                   margin={'normal'}
                   required
-                  type={'number'}
+                  type={'text'}
               />
                      
               <ButtonEats

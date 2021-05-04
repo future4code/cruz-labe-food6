@@ -1,15 +1,60 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import useForm from '../../hooks/useForm'
 import { Button, TextField } from '@material-ui/core';
+
+import labefood from '../../services/labefood';
 
 import {Container, InputContainer, P, ButtonEats, Header} from './styled'
 import arrow from '../../assets/arrow.png'
 
 import useProtectedPage from 'hooks/useProtectedPage';
-
+import { useHistory } from 'react-router';
+import { goToProfile } from 'routes/coordinator';
 
 function AdressEditPage() {
+
     useProtectedPage()
+
+    const AdressForm = {
+        street: "",
+        number: "",
+        neighbourhood: "",
+        city: "",
+        state: "",
+        complement: ""
+      }
+
+    const history = useHistory()
+    const token = window.localStorage.getItem("token")
+    const [form, handleInputChange, resetForm, setForm] = useForm(AdressForm)
+
+    useEffect(() => {
+        fullAddress()
+    }, [])
+
+    const fullAddress = () => {
+        labefood.getFullAddress(token)
+        .then((res) => {
+            setForm(res.address)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+
+    const updateAddress = (event) => {
+        event.preventDefault()
+
+        labefood.addAddress(form, token)
+        .then((res) => {
+            window.localStorage.setItem("token", res.token)
+            window.alert("Novo Endereço Salvo com Sucesso")
+            goToProfile(history)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
 
     return (
       <Container>
@@ -19,12 +64,11 @@ function AdressEditPage() {
         </Header>
       
       <InputContainer>
-          <form  //onSubmit={onSubmitForm}
-          >
+          <form onSubmit={updateAddress}>
               <TextField
-                  name={'logradouro'}
-                  //value={}
-                  //onChange={onChange}
+                  name={'street'}
+                  value={form.street}
+                  onChange={handleInputChange}
                   label={"Logradouro"}
                   placeholder={'Rua / AV'}
                   variant={'outlined'}
@@ -36,9 +80,9 @@ function AdressEditPage() {
               />
 
               <TextField
-                  name={'numero'}
-                  //value={}
-                  //onChange={onChange}
+                  name={'number'}
+                  value={form.number}
+                  onChange={handleInputChange}
                   label={"Número"}
                   placeholder={'Número'}
                   variant={'outlined'}
@@ -49,9 +93,9 @@ function AdressEditPage() {
               />
 
                   <TextField
-                  name={'complemento'}
-                  //value={}
-                  //onChange={onChange}
+                  name={'complement'}
+                  value={form.complement}
+                  onChange={handleInputChange}
                   label={"Complemento"}
                   placeholder={'Apto / Bloco'}
                   variant={'outlined'}
@@ -61,9 +105,9 @@ function AdressEditPage() {
                   type={'text'}
               />
               <TextField
-                  name={'bairro'}
-                  //value={}
-                  //onChange={onChange}
+                  name={'neighbourhood'}
+                  value={form.neighbourhood}
+                  onChange={handleInputChange}
                   label={"Bairro"}
                   placeholder={'Bairro'}
                   variant={'outlined'}
@@ -73,9 +117,9 @@ function AdressEditPage() {
                   type={'text'}
               />
               <TextField
-                  name={'cidade'}
-                  //value={}
-                  //onChange={onChange}
+                  name={'city'}
+                  value={form.city}
+                  onChange={handleInputChange}
                   label={"Cidade"}
                   placeholder={'Cidade'}
                   variant={'outlined'}
@@ -85,9 +129,9 @@ function AdressEditPage() {
                   type={'text'}
               />
               <TextField
-                  name={'estado'}
-                  //value={}
-                  //onChange={onChange}
+                  name={'state'}
+                  value={form.state}
+                  onChange={handleInputChange}
                   label={"Estado"}
                   placeholder={'Estado'}
                   variant={'outlined'}

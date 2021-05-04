@@ -19,15 +19,29 @@ const CardHistoric = () => {
                 alert(err.response.data.message)
             })
     }
+
+    const data =(timestamp) => {
+
+        const month = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+         "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
+
+        const data = new Date(timestamp)
+        const dia  = data.getDate().toString().padStart(2, '0')
+        const mes  = month[data.getMonth()]
+        const ano  = data.getFullYear()
+        return `${dia} ${mes} ${ano}`
+    }
+    
     return(<div>
-        {historic && historic.map(order => {
+        {historic && historic.length > 0 && historic.map(order => {
             return(<div
             key={order.createdAt}>
                 <h1>{order.restaurantName}</h1>
-                <h2>** de novembro de ****</h2>
+                <h2>{data(order.createdAt)}</h2>
                 <h2>{order.totalPrice}</h2><hr/>
                 </div>)
         })}
+        {historic && historic.length === 0 && <h1>Você não realizou nenhum pedido</h1>}
     </div>)
 }
 

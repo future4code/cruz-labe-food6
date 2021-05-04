@@ -42,7 +42,6 @@ function RegisterProfilePage() {
       else {
         alert("As senhas devem ser idênticas")
       }
-      console.log('teste')
     }
 
     return (
