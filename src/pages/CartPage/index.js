@@ -1,11 +1,20 @@
 import React from 'react'
+
+import {Container, P, Header} from './styled'
+
 import useProtectedPage from 'hooks/useProtectedPage';
+
 
 function CartPage() {
     useProtectedPage()
 
     return (
-      <h1>CartPage</h1>
+      <Container>
+      <Header>
+          <P>Meu Carrinho</P>
+      </Header>
+      
+    </Container>
     )
   }
   

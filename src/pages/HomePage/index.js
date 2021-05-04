@@ -1,3 +1,4 @@
+import {Container, P, Header} from './styled'
 import React, { useEffect, useState } from 'react';
 import labefood from 'services/labefood';
 import useProtectedPage from 'hooks/useProtectedPage';

@@ -1,11 +1,15 @@
 import React from 'react'
 import useForm from '../../hooks/useForm'
 import { Button, TextField } from '@material-ui/core';
-import {Container, InputContainer, P, ButtonEats} from './styled'
+import {Container, InputContainer, P, ButtonEats, Header} from './styled'
 import { goToHome } from 'routes/coordinator';
 import { useHistory } from 'react-router';
 import labefood from 'services/labefood';
+
+import arrow from '../../assets/arrow.png'
+
 import useUnprotectedPage from 'hooks/useUnprotectedPage';
+
 
 function RegisterAdressPage() {
     useUnprotectedPage()
@@ -40,6 +44,9 @@ function RegisterAdressPage() {
 
     return (
       <Container>
+        <Header>
+            <img src={arrow}/>
+        </Header>
       <P>Meu Endereço</P>
       <InputContainer>
           <form  onSubmit={createAdress}>
