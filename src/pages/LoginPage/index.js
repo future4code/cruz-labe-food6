@@ -1,16 +1,21 @@
-import React from 'react'
-import labefood from '../../services/labefood'
-import useForm from '../../hooks/useForm'
+import React from 'react';
+import labefood from '../../services/labefood';
+import useForm from '../../hooks/useForm';
 import { Button, TextField } from '@material-ui/core';
-import {Container, InputContainer, RegisterButtonContainer, P, Img, ButtonEats} from './styled'
+import {
+  Container,
+  InputContainer,
+  RegisterButtonContainer,
+  P,
+  Img,
+  ButtonEats,
+} from './styled';
 import { goToHome, goToRegisterProfile } from 'routes/coordinator';
-import logo from '../../assets/logo.png'
+import logo from '../../assets/logo.png';
 import { useHistory } from 'react-router';
 import useUnprotectedPage from 'hooks/useUnprotectedPage';
 
-
 function LoginPage() {
-
     useUnprotectedPage()
     
     const history = useHistory()
@@ -22,69 +27,70 @@ function LoginPage() {
       .then((res) => {
         window.localStorage.setItem("token", res.token)
         goToHome(history);
-      }).catch((err) => {
-        alert(err.response.data.message)
       })
-    }
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
+  };
 
-    return (
-      <Container>
-        <Img src={logo}/>
-        <P>Entrar</P>
-        <InputContainer>
-            <form onSubmit={login}>
-                <TextField
-                    name={'email'}
-                    value={form.email}
-                    onChange={handleInputChange}
-                    label={"E-mail"}
-                    placeholder={'email@email.com'}
-                    variant={'outlined'}
-                    fullWidth
-                    margin={'normal'}
-                    autoFocus
-                    required
-                    type={'email'}
-                />
+  return (
+    <Container>
+      <Img src={logo} />
+      <P>Entrar</P>
+      <InputContainer>
+        <form onSubmit={login}>
+          <TextField
+            name={'email'}
+            value={form.email}
+            onChange={handleInputChange}
+            label={'E-mail'}
+            placeholder={'email@email.com'}
+            variant={'outlined'}
+            fullWidth
+            margin={'normal'}
+            autoFocus
+            required
+            type={'email'}
+          />
 
-                <TextField
-                    name={'password'}
-                    value={form.password}
-                    onChange={handleInputChange}
-                    label={"Senha"}
-                    placeholder={'Mínimo 6 caracteres'}
-                    variant={'outlined'}
-                    fullWidth
-                    margin={'normal'}
-                    required
-                    type={'password'}
-                />
+          <TextField
+            name={'password'}
+            value={form.password}
+            onChange={handleInputChange}
+            label={'Senha'}
+            placeholder={'Mínimo 6 caracteres'}
+            variant={'outlined'}
+            fullWidth
+            margin={'normal'}
+            required
+            type={'password'}
+          />
 
-                <ButtonEats
-                type={'submit'}
-                fullWidth
-                variant={'contained'}
-                color={'primary'}
-                margin={'normal'}
-                >
-                    <P>Entrar</P>
-                </ButtonEats>
-            </form>
-        </InputContainer>
-        <RegisterButtonContainer>
-            <Button
-            onClick={() => goToRegisterProfile(history)}
+          <ButtonEats
             type={'submit'}
             fullWidth
-            variant={'text'}
-            color={'black'}
+            variant={'contained'}
+            color={'primary'}
             margin={'normal'}
-            >
-             Não Possui Cadastro? Clique Aqui.  
-            </Button>
-        </RegisterButtonContainer>
+          >
+            <P>Entrar</P>
+          </ButtonEats>
+        </form>
+      </InputContainer>
+      <RegisterButtonContainer>
+        <Button
+          onClick={() => goToRegisterProfile(history)}
+          type={'submit'}
+          fullWidth
+          variant={'text'}
+          color={'black'}
+          margin={'normal'}
+        >
+          Não Possui Cadastro? Clique Aqui.
+        </Button>
+      </RegisterButtonContainer>
     </Container>
-    )
-  }
-  
-  export default LoginPage;
+  );
+}
+
+export default LoginPage;
