@@ -1,11 +1,7 @@
 import React from 'react'
-import useProtectedPage from 'hooks/useProtectedPage';
 
 function RestaurantPage() {
-
-  useProtectedPage()
-
-  return (
+    return (
       <h1>RestaurantPage</h1>
     )
   }

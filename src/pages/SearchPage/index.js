@@ -1,10 +1,6 @@
-import useProtectedPage from 'hooks/useProtectedPage';
 import React from 'react'
 
 function SearchPage() {
-  
-    useProtectedPage()
-
     return (
       <div> 
         <h1>SearchPage</h1>

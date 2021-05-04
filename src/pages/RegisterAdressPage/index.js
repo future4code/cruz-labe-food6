@@ -5,10 +5,8 @@ import {Container, InputContainer, P, ButtonEats} from './styled'
 import { goToHome } from 'routes/coordinator';
 import { useHistory } from 'react-router';
 import labefood from 'services/labefood';
-import useUnprotectedPage from 'hooks/useUnprotectedPage';
 
 function RegisterAdressPage() {
-    useUnprotectedPage()
 
     const registerAdressForm = {
         street: "",

@@ -6,13 +6,10 @@ import {Container, InputContainer, RegisterButtonContainer, P, Img, ButtonEats} 
 import { goToHome, goToRegisterProfile } from 'routes/coordinator';
 import logo from '../../assets/logo.png'
 import { useHistory } from 'react-router';
-import useUnprotectedPage from 'hooks/useUnprotectedPage';
 
 
 function LoginPage() {
 
-    useUnprotectedPage()
-    
     const history = useHistory()
     const [form, handleInputChange] = useForm({ email: '', password: ''})
   
