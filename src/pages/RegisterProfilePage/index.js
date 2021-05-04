@@ -38,7 +38,7 @@ function RegisterProfilePage() {
       else {
         alert("As senhas devem ser idênticas")
       }
-
+      console.log('teste')
     }
 
     return (
@@ -46,11 +46,9 @@ function RegisterProfilePage() {
       <Img src={logo}/>
       <P>Cadastrar</P>
       <InputContainer>
-          <form  //onSubmit={onSubmitForm}
-          >
+          <form onSubmit={createProfile}>
               <TextField
                   name={'name'}
-                  //value={}
                   onChange={handleInputChange}
                   label={"Nome"}
                   placeholder={'Nome Completo'}
@@ -64,7 +62,6 @@ function RegisterProfilePage() {
 
               <TextField
                   name={'email'}
-                  //value={}
                   onChange={handleInputChange}
                   label={"E-mail"}
                   placeholder={'email@email.com'}
@@ -76,7 +73,6 @@ function RegisterProfilePage() {
               />
                      <TextField
                   name={'cpf'}
-                  //value={}
                   onChange={handleInputChange}
                   label={"CPF"}
                   placeholder={'000.000.000-00'}
@@ -84,12 +80,11 @@ function RegisterProfilePage() {
                   fullWidth
                   margin={'normal'}
                   required
-                  type={'number'}
+                  type={'text'}
               />
                      <TextField
                   name={'password'}
-                  //value={}
-                  //onChange={onChange}
+                  onChange={handleInputChange}
                   label={"Senha"}
                   placeholder={'Mínimo 6 caracteres'}
                   variant={'outlined'}
@@ -100,7 +95,6 @@ function RegisterProfilePage() {
               />
                      <TextField
                   name={'confirmPassWord'}
-                  //value={}
                   onChange={handleInputChange}
                   label={"Confirmar senha"}
                   placeholder={'Confirme a senha anterior'}

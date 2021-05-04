@@ -3,18 +3,21 @@ import labefood from '../../services/labefood'
 import useForm from '../../hooks/useForm'
 import { Button, TextField } from '@material-ui/core';
 import {Container, InputContainer, RegisterButtonContainer, P, Img, ButtonEats} from './styled'
-import { goToRegisterProfile } from 'routes/coordinator';
+import { goToHome, goToRegisterProfile } from 'routes/coordinator';
 import logo from '../../assets/logo.png'
+import { useHistory } from 'react-router';
 
 
 function LoginPage() {
+
+    const history = useHistory()
     const [form, handleInputChange] = useForm({ email: '', password: ''})
   
     const login = (e) => {
       e.preventDefault()
       labefood.login(form)
       .then((response) => {
-        console.log(response);
+        goToHome(history);
       }).catch((err) => {
         alert(err.response.data.message)
       })
@@ -25,12 +28,11 @@ function LoginPage() {
         <Img src={logo}/>
         <P>Entrar</P>
         <InputContainer>
-            <form  //onSubmit={onSubmitForm}
-            >
+            <form onSubmit={login}>
                 <TextField
                     name={'email'}
                     value={form.email}
-                    //onChange={onChange}
+                    onChange={handleInputChange}
                     label={"E-mail"}
                     placeholder={'email@email.com'}
                     variant={'outlined'}
@@ -44,7 +46,7 @@ function LoginPage() {
                 <TextField
                     name={'password'}
                     value={form.password}
-                    //onChange={onChange}
+                    onChange={handleInputChange}
                     label={"Senha"}
                     placeholder={'Mínimo 6 caracteres'}
                     variant={'outlined'}
@@ -67,7 +69,7 @@ function LoginPage() {
         </InputContainer>
         <RegisterButtonContainer>
             <Button
-            onClick={() => goToRegisterProfile()}
+            onClick={() => goToRegisterProfile(history)}
             type={'submit'}
             fullWidth
             variant={'text'}
