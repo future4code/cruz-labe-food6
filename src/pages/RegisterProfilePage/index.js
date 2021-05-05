@@ -1,7 +1,9 @@
-import React from 'react'
+import React, {useState} from "react";
+import { TextField, InputAdornment } from '@material-ui/core'
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import labefood from '../../services/labefood'
 import useForm from '../../hooks/useForm'
-import { Button, TextField } from '@material-ui/core';
 import {Container, InputContainer, Header, P, Img, ButtonEats} from './styled'
 import { goToRegisterAdress } from 'routes/coordinator';
 import logo from '../../assets/logo.png'
@@ -21,7 +23,7 @@ function RegisterProfilePage() {
       password: "",
       confirmPassWord: ""
     }
-
+    const [showPassword, setShowPassword] = useState(false)
     const history = useHistory()
     const [form, handleInputChange] = useForm(registerProfileForm)
 
@@ -44,6 +46,9 @@ function RegisterProfilePage() {
       }
     }
 
+    const handleClickShowPassword = () => {
+      setShowPassword(!showPassword)
+    }
     return (
       <Container>
          <Header>
@@ -88,28 +93,44 @@ function RegisterProfilePage() {
                   required
                   type={'text'}
               />
-                     <TextField
-                  name={'password'}
-                  onChange={handleInputChange}
-                  label={"Senha"}
-                  placeholder={'Mínimo 6 caracteres'}
-                  variant={'outlined'}
-                  fullWidth
-                  margin={'normal'}
-                  required
-                  type={'password'}
-              />
-                     <TextField
-                  name={'confirmPassWord'}
-                  onChange={handleInputChange}
-                  label={"Confirmar senha"}
-                  placeholder={'Confirme a senha anterior'}
-                  variant={'outlined'}
-                  fullWidth
-                  margin={'normal'}
-                  required
-                  type={'password'}
-              />
+             <TextField 
+            name={'password'}
+            onChange={handleInputChange}
+            label="Senha"
+            placeholder="Mínimo 6 caracteres"
+            type={showPassword ? "text" : "password" }
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            required
+            color="primary"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                 {showPassword ? <VisibilityIcon onClick={handleClickShowPassword}/> : <VisibilityOffIcon onClick={handleClickShowPassword}/>}
+                </InputAdornment>
+              ),
+            }}         
+          />
+          <TextField 
+            name={'confirmPassWord'}
+            onChange={handleInputChange}
+            label="Confirmar senha"
+            placeholder="Confirmar senha"
+            type={showPassword ? "text" : "password" }
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            required
+            color="primary"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                 {showPassword ? <VisibilityIcon onClick={handleClickShowPassword}/> : <VisibilityOffIcon onClick={handleClickShowPassword}/>}
+                </InputAdornment>
+              ),
+            }}     
+          />
 
               <ButtonEats
               type={'submit'}
