@@ -62,29 +62,24 @@ function LoginPage() {
             required
             type={'email'}
           />
-
-<TextField
+        <TextField 
             name={'password'}
-            value={form.password}
-            color="primary"
+            onChange={handleInputChange}
             label="Senha"
             placeholder="Mínimo 6 caracteres"
-            type={showPassword ? "text" : "password"}
+            type={showPassword ? "text" : "password" }
             variant="outlined"
             margin="normal"
             fullWidth
             required
+            color="primary"
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  {showPassword ? (
-                    <VisibilityIcon onClick={handleClickShowPassword} />
-                  ) : (
-                    <VisibilityOffIcon onClick={handleClickShowPassword} />
-                  )}
+                 {showPassword ? <VisibilityIcon onClick={handleClickShowPassword}/> : <VisibilityOffIcon onClick={handleClickShowPassword}/>}
                 </InputAdornment>
               ),
-            }}
+            }}         
           />
 
           <ButtonEats
