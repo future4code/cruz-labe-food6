@@ -11,6 +11,7 @@ import {
   RegisterAdressPage,
   RestaurantPage,
   SearchPage,
+  SplashScreenPage
 } from "pages/";
 
 function Router() {
@@ -18,8 +19,11 @@ function Router() {
     <BrowserRouter>
 
       <Switch>
-
         <Route exact path="/">
+          <SplashScreenPage />
+        </Route>
+
+        <Route exact path="/feed">
           <HomePage />
         </Route>
 
