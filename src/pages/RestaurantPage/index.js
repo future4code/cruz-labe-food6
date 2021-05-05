@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import useProtectedPage from 'hooks/useProtectedPage';
 import labefood from 'services/labefood';
 import { useParams } from 'react-router';
+import { GlobalStateContext } from 'global/GlobalStateContext';
 
 function RestaurantPage() {
   useProtectedPage();
   const { id } = useParams();
   const [details, setDetails] = useState({});
   const [loading, setLoading] = useState(true);
+  const [carrinho, adicionarAoCarrinho, removerDoCarrinho] = useContext(GlobalStateContext)
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -48,6 +50,7 @@ function RestaurantPage() {
             <div>
               <h3>{product.name}</h3>
               <img width="300" src={product.photoUrl} alt="product" />
+              <button onClick={() => adicionarAoCarrinho(product)}>Adicionar</button>
             </div>
           );
         })}
@@ -61,6 +64,7 @@ function RestaurantPage() {
             <div>
               <h3>{product.name}</h3>
               <img width="300" src={product.photoUrl} alt="product" />
+              <button onClick={() => adicionarAoCarrinho(product)}>Adicionar</button>
             </div>
           );
         })}
