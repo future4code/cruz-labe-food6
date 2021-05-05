@@ -1,4 +1,13 @@
-import {Container, P, Header, ContainerCard, DivDetail, DivPrice, ImgDiv, CardDiv} from './styled'
+import {
+  Container,
+  P,
+  Header,
+  ContainerCard,
+  DivDetail,
+  DivPrice,
+  ImgDiv,
+  CardDiv,
+} from './styled';
 import React, { useEffect, useState } from 'react';
 import labefood from 'services/labefood';
 import useProtectedPage from 'hooks/useProtectedPage';
@@ -35,7 +44,7 @@ function HomePage() {
       .finally(() => {
         setLoading(false);
       });
-      setLoading(false);
+    setLoading(false);
   }, []);
 
   const mystyle = {
@@ -56,10 +65,10 @@ function HomePage() {
 
   return (
     <Container>
-        <Header>
+      <Header>
         <P>FutureEats</P>
-        </Header>
-      <input placeholder={'Buscar'}/>
+      </Header>
+      <input placeholder={'Buscar'} />
       <div>
         {categories.map((category) => {
           return (
@@ -71,29 +80,29 @@ function HomePage() {
       </div>
 
       <CardDiv>
-      {filteredRestaurants?.map((restaurant) => {
-        return (
-          <ContainerCard onClick={() => goToRestaurant(history)} 
-            key={restaurant.id}
-            title={restaurant.description}
-          >
-            <ImgDiv>
-            <img src={restaurant.logoUrl} alt="restaurant" />
-            </ImgDiv>
-            <DivDetail>
-            <p>{restaurant.name}</p>
-            <DivPrice>
-            <p>{restaurant.deliveryTime} min</p>
-            <p>Frete R${restaurant.shipping}</p>
-            </DivPrice>
-            </DivDetail>
-          </ContainerCard>
-        );
-        
-      })}
+        {filteredRestaurants?.map((restaurant) => {
+          return (
+            <ContainerCard
+              onClick={() => goToRestaurant(history, restaurant.id)}
+              key={restaurant.id}
+              title={restaurant.description}
+            >
+              <ImgDiv>
+                <img src={restaurant.logoUrl} alt="restaurant" />
+              </ImgDiv>
+              <DivDetail>
+                <p>{restaurant.name}</p>
+                <DivPrice>
+                  <p>{restaurant.deliveryTime} min</p>
+                  <p>Frete R${restaurant.shipping}</p>
+                </DivPrice>
+              </DivDetail>
+            </ContainerCard>
+          );
+        })}
       </CardDiv>
 
-      <Footer/>
+      <Footer />
     </Container>
   );
 }
