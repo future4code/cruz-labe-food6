@@ -8,7 +8,6 @@ import logo from '../../assets/logo.png'
 import arrow from '../../assets/arrow.png'
 import {useHistory} from 'react-router-dom'
 import useUnprotectedPage from 'hooks/useUnprotectedPage';
-import { Event } from '@material-ui/icons';
 
 
 function RegisterProfilePage() {
