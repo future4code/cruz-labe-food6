@@ -68,7 +68,7 @@ function HomePage() {
       <Header>
         <P>FutureEats</P>
       </Header>
-      <input placeholder={'Buscar'} />
+      <input placeholder={'Restaurante'} />
       <div>
         {categories.map((category) => {
           return (
