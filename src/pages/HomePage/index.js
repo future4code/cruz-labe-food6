@@ -1,13 +1,15 @@
 import {
   Container,
-  P,
   Header,
-  ContainerCard,
-  DivDetail,
-  DivPrice,
-  ImgDiv,
+  BoxCard,
+  BoxInside,
+  ImgBox,
+  RestaurantName,
+  ContainerInfos,
+  InfoText,
   CardDiv,
-} from './styled';
+  P
+} from "./styled";
 import React, { useEffect, useState } from 'react';
 import labefood from 'services/labefood';
 import useProtectedPage from 'hooks/useProtectedPage';
@@ -91,28 +93,22 @@ function HomePage() {
         })}
       </div>
 
-      <CardDiv>
+      <BoxCard>
         {filteredRestaurants?.map((restaurant) => {
           return (
-            <ContainerCard
-              onClick={() => goToRestaurant(history, restaurant.id)}
+              <BoxInside  onClick={() => goToRestaurant(history, restaurant.id)}
               key={restaurant.id}
-              title={restaurant.description}
-            >
-              <ImgDiv>
-                <img src={restaurant.logoUrl} alt="restaurant" />
-              </ImgDiv>
-              <DivDetail>
-                <p>{restaurant.name}</p>
-                <DivPrice>
-                  <p>{restaurant.deliveryTime} min</p>
-                  <p>Frete R${restaurant.shipping}</p>
-                </DivPrice>
-              </DivDetail>
-            </ContainerCard>
+              title={restaurant.description}>
+                <ImgBox src={restaurant.logoUrl} alt="restaurant" />
+                <RestaurantName>{restaurant.name}</RestaurantName>
+                  <ContainerInfos>
+                  <InfoText>{restaurant.deliveryTime} min</InfoText>
+                  <InfoText>Frete R${restaurant.shipping}</InfoText>
+                  </ContainerInfos>
+              </BoxInside>
           );
         })}
-      </CardDiv>
+      </BoxCard>
 
       <Footer />
     </Container>
