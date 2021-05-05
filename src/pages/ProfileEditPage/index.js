@@ -38,10 +38,15 @@ function ProfileEditPage() {
 
     const editProfile = (event) => {
         event.preventDefault()
+
+        if (form.cpf.length !== 14) {
+            alert("O CPF está incompleto") 
+              return
+          }
+
         labefood.updateProfile(form, token)
         .then((res) => {
             alert("Modificado com sucesso!")
-            console.log(res)
             goToProfile(history)
         })
         .catch((err) => {
@@ -49,6 +54,39 @@ function ProfileEditPage() {
             console.log(err)
         })
     }
+
+    const formatarCpf = (event) => {
+
+        let documento = event.target.value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g,"\$1.\$2.\$3\-\$4")
+        const lastCharacter = documento.charAt(documento.length - 1)
+  
+        if (event.target.value.length - form.cpf.length > 1) {
+          return
+        }
+  
+        if (!(Number(lastCharacter) >= 0) || lastCharacter === " ") {
+          setForm({...form, cpf: documento.substring(0, documento.length - 1)})
+          return
+        }
+  
+        if (documento.length === 13 && form.cpf.length === 14) {
+  
+          let novoDocumento = ""
+  
+          for (let character of documento) {
+            if (Number(character) > 0) {
+              novoDocumento += character
+            }
+            documento = novoDocumento
+          }
+        }
+  
+        if (documento.length > 14) {
+          return
+        }
+  
+        setForm({...form, cpf: documento})
+      }
 
     return (
       <Container>
@@ -88,7 +126,7 @@ function ProfileEditPage() {
                      <TextField
                   name={'cpf'}
                   value={form.cpf}
-                  onChange={handleInputChange}
+                  onChange={formatarCpf}
                   label={"CPF"}
                   placeholder={'000.000.000-00'}
                   variant={'outlined'}
