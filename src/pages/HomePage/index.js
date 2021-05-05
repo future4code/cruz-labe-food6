@@ -2,7 +2,7 @@ import {Container, P, Header, ContainerCard, DivDetail, DivPrice, ImgDiv, CardDi
 import React, { useEffect, useState } from 'react';
 import labefood from 'services/labefood';
 import useProtectedPage from 'hooks/useProtectedPage';
-import { goToHome, goToCart, goToProfile } from 'routes/coordinator';
+import { goToRestaurant } from 'routes/coordinator';
 import { useHistory } from 'react-router-dom';
 import Footer from 'components/Footer';
 
@@ -73,7 +73,7 @@ function HomePage() {
       <CardDiv>
       {filteredRestaurants?.map((restaurant) => {
         return (
-          <ContainerCard 
+          <ContainerCard onClick={() => goToRestaurant(history)} 
             key={restaurant.id}
             title={restaurant.description}
           >

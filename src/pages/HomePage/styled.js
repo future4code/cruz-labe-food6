@@ -36,6 +36,7 @@ flex-direction: column;
   border: solid 1px gray;
   margin-top: 10px;
   justify-content:center;
+  cursor: pointer;
 `
 export const ImgDiv = styled.div `
  width: 100%;
@@ -69,5 +70,4 @@ p{
 
 export const CardDiv = styled.div`
     height: 100vh;
-    
 `
