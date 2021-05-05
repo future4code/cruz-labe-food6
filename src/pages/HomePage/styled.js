@@ -7,14 +7,6 @@ align-items: center;
 width: 100vw;
 font-family: 'Roboto', sans-serif;
 
-input{
-    display:flex;
-    justify-content: center;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    padding: 16px 20px;
-    width: 80%;
-}
 `
 
 export const P = styled.p `

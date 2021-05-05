@@ -14,6 +14,10 @@ import useProtectedPage from 'hooks/useProtectedPage';
 import { goToRestaurant } from 'routes/coordinator';
 import { useHistory } from 'react-router-dom';
 import Footer from 'components/Footer';
+import {TextField} from "@material-ui/core";
+import Search from "@material-ui/icons/Search";
+import InputAdornment from "@material-ui/core/InputAdornment";
+
 
 function HomePage() {
   useProtectedPage();
@@ -47,14 +51,6 @@ function HomePage() {
     setLoading(false);
   }, []);
 
-  const mystyle = {
-    backgroundColor: 'DodgerBlue',
-    padding: '10px',
-    margin: '10px',
-    border: '1px solid black',
-    width: '300px',
-  };
-
   const filteredRestaurants = restaurants?.filter((restaurant) => {
     return restaurant.category === categoryFilter;
   });
@@ -68,7 +64,23 @@ function HomePage() {
       <Header>
         <P>FutureEats</P>
       </Header>
-      <input placeholder={'Restaurante'} />
+      <div>
+          <TextField
+            id="outlined-basic"
+            label="Restaurantes"
+            variant="outlined"
+            type="text"
+            color="primary"
+            margin="normal"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Search style={{ color: "gray" }} />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </div>
       <div>
         {categories.map((category) => {
           return (
