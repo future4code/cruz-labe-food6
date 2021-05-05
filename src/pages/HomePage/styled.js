@@ -5,14 +5,11 @@ display: flex;
 flex-direction: column;
 align-items: center;
 width: 100vw;
-height: 100vh;
-font-family: Roboto, sans-serif;
+font-family: 'Roboto', sans-serif;
 
 input{
     margin-top: 10px;
-     
 }
-
 `
 
 export const P = styled.p `
@@ -47,7 +44,6 @@ export const ImgDiv = styled.div `
     height: 100%;
     width: 100%;
     object-fit: fill;
-
 }
 `
 export const DivDetail = styled.div `
@@ -69,4 +65,9 @@ p{
     color: #b8b8b8;
     font-size: 16px;
 }
+`
+
+export const CardDiv = styled.div`
+    height: 100vh;
+    
 `

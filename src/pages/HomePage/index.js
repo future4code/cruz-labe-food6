@@ -1,4 +1,4 @@
-import {Container, P, Header, ContainerCard, DivDetail, DivPrice, ImgDiv} from './styled'
+import {Container, P, Header, ContainerCard, DivDetail, DivPrice, ImgDiv, CardDiv} from './styled'
 import React, { useEffect, useState } from 'react';
 import labefood from 'services/labefood';
 import useProtectedPage from 'hooks/useProtectedPage';
@@ -70,9 +70,10 @@ function HomePage() {
         })}
       </div>
 
+      <CardDiv>
       {filteredRestaurants?.map((restaurant) => {
         return (
-          <ContainerCard
+          <ContainerCard 
             key={restaurant.id}
             title={restaurant.description}
           >
@@ -88,7 +89,9 @@ function HomePage() {
             </DivDetail>
           </ContainerCard>
         );
+        
       })}
+      </CardDiv>
 
       <Footer/>
     </Container>
