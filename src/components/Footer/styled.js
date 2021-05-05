@@ -1,14 +1,22 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-export const Container = styled.div `
-display: flex;
-justify-content: space-around;
+import AppBar from "@material-ui/core/AppBar";
 
-div {
-    width: 100%;
-    display:flex;
-    position: absolute;
-    justify-content: space-around;
-    bottom: 0;
-    }
-`
+export const AppFooter = styled(AppBar)`
+  height: 3rem;
+  margin-top: 593px;
+  position: fixed;
+  background-color: #fafafa;
+  color: black;
+  box-shadow: 0 -1px 3px 0 rgba(0, 0, 0, 0.2),
+    0 -2px 1px -1px rgba(0, 0, 0, 0.12), 0 -1px 1px 0 rgba(0, 0, 0, 0.14);
+  display: ${({ open }) => (open ? "inherit" : "none")};
+`;
+
+export const Wrapper = styled.div`
+  display: flex;
+  height: 100%;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #fff;
+`;
