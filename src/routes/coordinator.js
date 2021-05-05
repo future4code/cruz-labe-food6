@@ -1,5 +1,5 @@
 export const goToHome = (history) => {
-    history.push("/")
+    history.push("/feed")
 }
 
 export const goToLogin = (history) => {
