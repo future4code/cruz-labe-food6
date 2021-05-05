@@ -101,7 +101,6 @@ function AdressEditPage() {
                   variant={'outlined'}
                   fullWidth
                   margin={'normal'}
-                  required
                   type={'text'}
               />
               <TextField

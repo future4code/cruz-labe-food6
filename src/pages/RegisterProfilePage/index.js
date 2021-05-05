@@ -8,6 +8,7 @@ import logo from '../../assets/logo.png'
 import arrow from '../../assets/arrow.png'
 import {useHistory} from 'react-router-dom'
 import useUnprotectedPage from 'hooks/useUnprotectedPage';
+import { Event } from '@material-ui/icons';
 
 
 function RegisterProfilePage() {
@@ -23,10 +24,16 @@ function RegisterProfilePage() {
     }
 
     const history = useHistory()
-    const [form, handleInputChange] = useForm(registerProfileForm)
+    const [form, handleInputChange, clearForm, setForm] = useForm(registerProfileForm)
 
     const createProfile = (event) => {
       event.preventDefault()
+
+      if (form.cpf.length !== 14) {
+        alert("O CPF está incompleto") 
+          return
+      }
+
       if (form.password === form.confirmPassWord) {
 
         const body = {...form}
@@ -42,6 +49,39 @@ function RegisterProfilePage() {
       else {
         alert("As senhas devem ser idênticas")
       }
+    }
+
+    const formatarCpf = (event) => {
+
+      let documento = event.target.value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g,"\$1.\$2.\$3\-\$4")
+      const lastCharacter = documento.charAt(documento.length - 1)
+
+      if (event.target.value.length - form.cpf.length > 1) {
+        return
+      }
+
+      if (!(Number(lastCharacter) >= 0) || lastCharacter === " ") {
+        setForm({...form, cpf: documento.substring(0, documento.length - 1)})
+        return
+      }
+
+      if (documento.length === 13 && form.cpf.length === 14) {
+
+        let novoDocumento = ""
+
+        for (let character of documento) {
+          if (Number(character) > 0) {
+            novoDocumento += character
+          }
+          documento = novoDocumento
+        }
+      }
+
+      if (documento.length > 14) {
+        return
+      }
+
+      setForm({...form, cpf: documento})
     }
 
     return (
@@ -79,7 +119,8 @@ function RegisterProfilePage() {
               />
                      <TextField
                   name={'cpf'}
-                  onChange={handleInputChange}
+                  onChange={formatarCpf}
+                  value={form.cpf}
                   label={"CPF"}
                   placeholder={'000.000.000-00'}
                   variant={'outlined'}
