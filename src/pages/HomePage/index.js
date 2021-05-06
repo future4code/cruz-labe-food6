@@ -7,7 +7,6 @@ import {
   RestaurantName,
   ContainerInfos,
   InfoText,
-  CardDiv,
   P
 } from "./styled";
 import React, { useEffect, useState } from 'react';
