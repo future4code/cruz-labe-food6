@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import useProtectedPage from 'hooks/useProtectedPage';
 import labefood from 'services/labefood';
 import CardHistoric from 'components/CardHistorico';
+import CreateOutlinedIcon from "@material-ui/icons/CreateOutlined";
+import {ProfileContainer, IconEdit, Container, Header, P, P1, AddressContainer, Title, Address} from './styled'
 import { goToEditAdress, goToEditProfile } from 'routes/coordinator';
 import { useHistory } from 'react-router';
 import Footer from 'components/Footer';
@@ -31,24 +33,31 @@ function ProfilePage() {
     }, [])
 
 
-  return (<div>
+  return (
+  <Container>
+      <Header>
+        <P>Meu Perfil</P>
+      </Header>
     {user && <div>
-        <div>
-          <h1>Perfil</h1>
-          <h1>{user.name}</h1>
-          <h1>{user.email}</h1>
-          <h1>{user.cpf}</h1>
-          <button onClick={() => goToEditProfile(history)}>Editar perfil</button>
-        </div>
+        <ProfileContainer>
+          <IconEdit>
+          <P1>{user.name}</P1>
+          <CreateOutlinedIcon onClick={() => goToEditProfile(history)}/>
+          </IconEdit>
+          <P1>{user.email}</P1>
+          <P1>{user.cpf}</P1>
+          </ProfileContainer>
         
+        <AddressContainer>
+          <Title>Endereço Cadastrado</Title>
+          <IconEdit>
+          <Address>{user.address}</Address>
+          <CreateOutlinedIcon onClick={() => goToEditAdress(history)}/>
+          </IconEdit>
+        </AddressContainer>
+
         <div>
-          <h3>Endereço Cadastrado</h3>
-          <h2>{user.address}</h2>
-        <button onClick={() => goToEditAdress(history)}>Editar Endereço</button>
-        </div>
-      
-        <div>
-          <h3>Historico de Pedidos</h3>
+          <P>Historico de Pedidos</P>
           <hr/>
           <CardHistoric/>
         </div>
@@ -58,7 +67,7 @@ function ProfilePage() {
       {}
       {!user && <h1>Loading</h1>}
       <Footer/>
-    </div>)
+    </Container>)
   }
   
   export default ProfilePage;
