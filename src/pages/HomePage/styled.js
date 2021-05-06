@@ -25,8 +25,7 @@ export const RestaurantName = styled.p`
   display: flex;
   justify-content: flex-start;
   padding-top: 8px;
-  font-family: -apple-system, -apple-system, Roboto, 'Open Sans', 'Helvetica Neue', 
-  sans-serif, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, Roboto, "Open Sans", sans-serif;
   color: #5cb646;
   font-size: 1rem;
   margin: 0;
@@ -43,8 +42,7 @@ export const InfoText = styled.p`
   font-size: 1rem;
   color: #b8b8b8;
   margin: 5px 0 0 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, Roboto, "Open Sans", sans-serif;
 `
 
 export const AllContainer = styled.div`
@@ -78,3 +76,20 @@ border-bottom: solid 1px #E8E8E8;
 justify-content: center;
 `
 
+export const CarouselContainer = styled.div`
+  display: flex;
+  height: 100%;
+  width: 100%;
+  overflow: scroll;
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+`;
+export const Carousel = styled.p`
+  padding: 0px 18px;
+  &:hover {
+    cursor: pointer;
+    color: #5cb646;
+  }
+`;
