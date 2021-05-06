@@ -89,3 +89,23 @@ export const Button = styled.button`
 export const InputCheck = styled.input`
 margin-left: 1rem;
 `
+
+export const BoxInfo = styled.div`
+  width: 100vw;
+  background-color: #eeeeee;
+  height: auto;
+`;
+
+export const Title = styled.p`
+  color: #b8b8b8;
+  text-align: start;
+  margin-left: 1rem;
+  margin-bottom: 0;
+  font-family: -apple-system, Roboto, "Open Sans",  sans-serif;
+`;
+
+export const InfoAddress = styled.p`
+  color: black;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+`;
