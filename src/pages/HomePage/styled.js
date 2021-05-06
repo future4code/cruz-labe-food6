@@ -4,7 +4,7 @@ export const BoxCard = styled.div`
   width: 85vw;
   border: 1px solid #b8b8b8;
   border-radius: 8px;
-  margin-bottom: 0.875rem;
+  margin-bottom: 10px;
   height: 190px;
   margin-top: 20px;
 `
