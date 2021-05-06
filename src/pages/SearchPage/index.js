@@ -2,6 +2,12 @@ import useProtectedPage from 'hooks/useProtectedPage';
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import labefood from 'services/labefood';
+import {TextField} from "@material-ui/core";
+import Search from "@material-ui/icons/Search";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import { Container, Header, BoxCard, ImgBox, RestaurantName, ContainerInfos, InfoText } from './styled'
+import { goToRestaurant } from 'routes/coordinator';
+import arrow from '../../assets/arrow.png'
 
 function SearchPage() {
   useProtectedPage();
@@ -26,7 +32,6 @@ function SearchPage() {
   }, []);
 
   const mystyle = {
-    backgroundColor: 'DodgerBlue',
     padding: '10px',
     margin: '10px',
     border: '1px solid black',
@@ -39,12 +44,16 @@ function SearchPage() {
     })
     ?.map((restaurant) => {
       return (
-        <div key={restaurant.id} style={mystyle} title={restaurant.description}>
-          <img width="300" src={restaurant.logoUrl} alt="restaurant" />
-          <p>{restaurant.name}</p>
-          <p>{restaurant.deliveryTime} min</p>
-          <p>Frete R${restaurant.shipping}</p>
-        </div>
+        <BoxCard onClick={() => goToRestaurant(history, restaurant.id)}
+        key={restaurant.id}  title={restaurant.description}>
+          <ImgBox width="300" src={restaurant.logoUrl} alt="restaurant" />
+          <RestaurantName>{restaurant.name}</RestaurantName>
+              <ContainerInfos>
+              <InfoText>{restaurant.deliveryTime} min</InfoText>
+              <InfoText>Frete R${restaurant.shipping}</InfoText>
+              </ContainerInfos>
+          </BoxCard>
+          
       );
     });
 
@@ -57,14 +66,29 @@ function SearchPage() {
   }
 
   return (
-    <div>
-      <h1>SearchPage</h1>
-      <input
+    <Container>
+      <Header>
+        <img src={arrow}/>
+        <p>Busca</p>
+      </Header>
+      <TextField
         name="search"
         type="text"
+        label="Restaurantes"
+        variant="outlined"
+        type="text"
+        color="primary"
+        margin="normal"
         value={searchQuery}
         placeholder="Restaurante"
         onChange={handleSearchChange}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <Search style={{ color: "gray" }} />
+            </InputAdornment>
+          ),
+        }}
       />
 
       {searchQuery ? (
@@ -72,7 +96,7 @@ function SearchPage() {
       ) : (
         <p>Busque por nomes de restaurante</p>
       )}
-    </div>
+    </Container>
   );
 }
 
