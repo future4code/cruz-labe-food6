@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import labefood from 'services/labefood';
+import {
+    CardContainer,
+    InfoContainer,
+    NameProduct,
+    PriceProduct,
+    TitleProduct
+} from './styled'
 
 const CardHistoric = () => {
 
@@ -34,12 +41,14 @@ const CardHistoric = () => {
     
     return(<div>
         {historic && historic.length > 0 && historic.map(order => {
-            return(<div
-            key={order.createdAt}>
-                <h1>{order.restaurantName}</h1>
-                <h2>{data(order.createdAt)}</h2>
-                <h2>{order.totalPrice}</h2><hr/>
-                </div>)
+            return(
+             <CardContainer
+                key={order.createdAt}>
+                <NameProduct>{order.restaurantName}</NameProduct>
+                <TitleProduct>{data(order.createdAt)}</TitleProduct>
+                <PriceProduct>SUBTOTAL R$ {order.totalPrice}</PriceProduct>
+            </CardContainer>
+                )
         })}
         {historic && historic.length === 0 && <h1>Você não realizou nenhum pedido</h1>}
     </div>)
