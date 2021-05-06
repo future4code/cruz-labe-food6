@@ -4,6 +4,8 @@ import Footer from 'components/Footer';
 import labefood from 'services/labefood';
 import { useParams } from 'react-router';
 import { GlobalStateContext } from 'global/GlobalStateContext';
+import { Container, Header, P, Subtitle, Restaurant, Img, Name, Category, Delivery, Shipping, Address, Product, PdtImg, PdtName, PdtPrice, PdtDescription, Button, Qtd } from './styled'
+import arrow from '../../assets/arrow.png'
 
 function RestaurantPage() {
   // useProtectedPage();
@@ -57,71 +59,80 @@ function RestaurantPage() {
   });
 
   return (
-    <div>
-      <img width="200" src={details.logoUrl} />
-      <h3>{details.name}</h3>
-      <h4>{details.category}</h4>
-      <h4>
-        {details.deliveryTime - 5} - {details.deliveryTime + 5}
-      </h4>
-      <h4>Frete R${details.shipping}</h4>
-      <p>{details.address}</p>
-      <h2>Principais</h2>
+    <Container>
+      <Header>
+        <img src={arrow}/>
+        <P>Restaurante</P>
+      </Header>
+      <Restaurant>
+        <Img width="200" src={details.logoUrl} />
+        <Name>{details.name}</Name>
+        <Category>{details.category}</Category>
+        <Delivery>
+          {details.deliveryTime - 5} - {details.deliveryTime + 5} min
+        </Delivery>
+        <Shipping>Frete R${details.shipping.toFixed(2)}</Shipping>
+        <Address>{details.address}</Address>
+      </Restaurant>
+      <Subtitle>Principais</Subtitle>
       {filteredProducts
         .filter((product) => {
           return product.category === 'Lanche';
         })
         .map((product) => {
           return (
-            <div key={product.id}>
-              <h3>{product.name}</h3>
-              <img width="300" src={product.photoUrl} alt="product" />
+            <Product key={product.id}>
+              <PdtImg width="300" src={product.photoUrl} alt="product" />
+              <PdtName>{product.name}</PdtName>
+              <PdtPrice>{`R$${product.price.toFixed(2)}`}</PdtPrice>
+              <PdtDescription>{product.description}</PdtDescription>
               {product.quantity ? (
                 <>
-                  <button onClick={() => removerDoCarrinho(product.id)}>
+                  <Button onClick={() => removerDoCarrinho(product.id)}>
                     Remover
-                  </button>
-                  <span onClick={() => alterarCarrinhoAux(product.id)}>
-                    {product.quantity}
-                  </span>
+                  </Button>
+                  <Qtd onClick={() => alterarCarrinhoAux(product.id)}>
+                    <p>{product.quantity}</p>
+                  </Qtd>
                 </>
               ) : (
-                <button onClick={() => adicionarAoCarrinho(product, details)}>
+                <Button onClick={() => adicionarAoCarrinho(product, details)}>
                   Adicionar
-                </button>
+                </Button>
               )}
-            </div>
+            </Product>
           );
         })}
-      <h2>Acompanhamentos</h2>
+      <Subtitle>Acompanhamentos</Subtitle>
       {filteredProducts
         .filter((product) => {
           return product.category !== 'Lanche';
         })
         .map((product) => {
           return (
-            <div key={product.id}>
-              <h3>{product.name}</h3>
-              <img width="300" src={product.photoUrl} alt="product" />
+            <Product key={product.id}>
+              <PdtImg width="300" src={product.photoUrl} alt="product" />
+              <PdtName>{product.name}</PdtName>
+              <PdtPrice>{`R$${product.price.toFixed(2)}`}</PdtPrice>
               {product.quantity > 0 ? (
                 <>
-                  <button onClick={() => removerDoCarrinho(product.id)}>
+                  <Button onClick={() => removerDoCarrinho(product.id)}>
                     Remover
-                  </button>
-                  <span onClick={() => alterarCarrinhoAux(product.id)}>
-                    {product.quantity}
-                  </span>
+                  </Button>
+                  <Qtd onClick={() => alterarCarrinhoAux(product.id)}>
+                    <p>{product.quantity}</p>
+                  </Qtd>
                 </>
               ) : (
-                <button onClick={() => adicionarAoCarrinho(product, details)}>
+                <Button onClick={() => adicionarAoCarrinho(product, details)}>
                   Adicionar
-                </button>
+                </Button>
               )}
-            </div>
+            </Product>
           );
         })}
       <Footer />
-    </div>
+    </Container>
   );
 }
 
