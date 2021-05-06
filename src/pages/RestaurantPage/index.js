@@ -119,9 +119,9 @@ function RestaurantPage() {
                   <Button onClick={() => removerDoCarrinho(product.id)}>
                     Remover
                   </Button>
-                  <span onClick={() => alterarCarrinhoAux(product.id)}>
-                    {product.quantity}
-                  </span>
+                  <Qtd onClick={() => alterarCarrinhoAux(product.id)}>
+                    <p>{product.quantity}</p>
+                  </Qtd>
                 </>
               ) : (
                 <Button onClick={() => adicionarAoCarrinho(product, details)}>
