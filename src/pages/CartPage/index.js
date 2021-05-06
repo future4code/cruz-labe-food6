@@ -9,7 +9,10 @@ import {
   LabelCheckBox,
   Button,
   InputCheck,
-  PaymentMethod,} from './styled'
+  PaymentMethod,
+  BoxInfo,
+  InfoAddress,
+  Title} from './styled'
 import FormControl from "@material-ui/core/FormControl";
 import useProtectedPage from 'hooks/useProtectedPage';
 import Footer from 'components/Footer';
@@ -22,6 +25,14 @@ function CartPage() {
       <Header>
           <P>Meu Carrinho</P>
       </Header>
+      <BoxInfo>
+          <Title>Endereço de entrega</Title>
+          <InfoAddress>
+             Cidade: 
+             SP <br />
+            Rua/Bairro
+          </InfoAddress>
+        </BoxInfo>
       <Payment>
         <PaymentMethod>Forma de Pagamento</PaymentMethod>
       </Payment>
