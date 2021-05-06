@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from "react";
 import labefood from '../../services/labefood';
 import useForm from '../../hooks/useForm';
-import { Button, TextField } from '@material-ui/core';
+import {
+  Button,
+  InputAdornment,
+  TextField,
+} from "@material-ui/core";
 import {
   Container,
   InputContainer,
@@ -10,6 +14,8 @@ import {
   Img,
   ButtonEats,
 } from './styled';
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
+import VisibilityIcon from "@material-ui/icons/Visibility";
 import { goToHome, goToRegisterProfile } from 'routes/coordinator';
 import logo from '../../assets/logo.png';
 import { useHistory } from 'react-router';
@@ -20,6 +26,7 @@ function LoginPage() {
     
     const history = useHistory()
     const [form, handleInputChange] = useForm({ email: '', password: ''})
+    const [showPassword, setShowPassword] = useState(false);
   
     const login = (e) => {
       e.preventDefault()
@@ -33,6 +40,9 @@ function LoginPage() {
       });
   };
 
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
   return (
     <Container>
       <Img src={logo} />
@@ -52,18 +62,24 @@ function LoginPage() {
             required
             type={'email'}
           />
-
-          <TextField
+        <TextField 
             name={'password'}
-            value={form.password}
             onChange={handleInputChange}
-            label={'Senha'}
-            placeholder={'Mínimo 6 caracteres'}
-            variant={'outlined'}
+            label="Senha"
+            placeholder="Mínimo 6 caracteres"
+            type={showPassword ? "text" : "password" }
+            variant="outlined"
+            margin="normal"
             fullWidth
-            margin={'normal'}
             required
-            type={'password'}
+            color="primary"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                 {showPassword ? <VisibilityIcon onClick={handleClickShowPassword}/> : <VisibilityOffIcon onClick={handleClickShowPassword}/>}
+                </InputAdornment>
+              ),
+            }}         
           />
 
           <ButtonEats

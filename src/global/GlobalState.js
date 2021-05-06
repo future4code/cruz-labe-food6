@@ -65,9 +65,26 @@ export default function GlobalState(props) {
     setCarrinho({ ...carrinho, produtos: novaLista });
   };
 
-  const alterarCarrinho = (item) => {};
+  const alterarCarrinho = (id, quantidade) => {
+    const novaLista = carrinho.produtos.map((product) => {
+      if (product.id === id) {
+        const newProduct = {
+          ...product,
+          quantity: quantidade,
+        };
+        return newProduct;
+      }
+      return product;
+    });
+    setCarrinho({ ...carrinho, produtos: novaLista });
+  };
 
-  const context = [carrinho, adicionarAoCarrinho, removerDoCarrinho];
+  const context = [
+    carrinho,
+    adicionarAoCarrinho,
+    removerDoCarrinho,
+    alterarCarrinho,
+  ];
 
   return (
     <GlobalStateContext.Provider value={context}>
@@ -75,5 +92,3 @@ export default function GlobalState(props) {
     </GlobalStateContext.Provider>
   );
 }
-
-//const [carrinho, adicionarAoCarrinho, removerDoCarrinho] = useContext(GlobalStateContext)

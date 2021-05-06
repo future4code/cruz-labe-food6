@@ -9,9 +9,12 @@ function RestaurantPage() {
   const { id } = useParams();
   const [details, setDetails] = useState({});
   const [loading, setLoading] = useState(true);
-  const [carrinho, adicionarAoCarrinho, removerDoCarrinho] = useContext(
-    GlobalStateContext
-  );
+  const [
+    carrinho,
+    adicionarAoCarrinho,
+    removerDoCarrinho,
+    alterarCarrinho,
+  ] = useContext(GlobalStateContext);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -27,6 +30,15 @@ function RestaurantPage() {
         setLoading(false);
       });
   }, []);
+
+  const alterarCarrinhoAux = (id) => {
+    const quantidade = Number(prompt('Digite a quantidade nova'));
+    if (isNaN(quantidade)) {
+      alert('Numero invalido');
+      return;
+    }
+    alterarCarrinho(id, quantidade);
+  };
 
   if (loading) {
     return <h1>Loading...</h1>;
@@ -67,7 +79,9 @@ function RestaurantPage() {
                   <button onClick={() => removerDoCarrinho(product.id)}>
                     Remover
                   </button>
-                  <p>{product.quantity}</p>
+                  <span onClick={() => alterarCarrinhoAux(product.id)}>
+                    {product.quantity}
+                  </span>
                 </>
               ) : (
                 <button onClick={() => adicionarAoCarrinho(product)}>
@@ -92,7 +106,9 @@ function RestaurantPage() {
                   <button onClick={() => removerDoCarrinho(product.id)}>
                     Remover
                   </button>
-                  <p>{product.quantity}</p>
+                  <span onClick={() => alterarCarrinhoAux(product.id)}>
+                    {product.quantity}
+                  </span>
                 </>
               ) : (
                 <button onClick={() => adicionarAoCarrinho(product)}>

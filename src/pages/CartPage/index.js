@@ -1,5 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Container, P, Header } from './styled';
+import {
+  Container,
+  P,
+  Header,
+  Payment,
+  CheckBoxContainer,
+  LabelCheckBox,
+  Button,
+  InputCheck,
+  PaymentMethod,
+} from './styled';
+import FormControl from '@material-ui/core/FormControl';
 import useProtectedPage from 'hooks/useProtectedPage';
 import Footer from 'components/Footer';
 import labefood from 'services/labefood';
@@ -65,36 +76,37 @@ function CartPage() {
       <Header>
         <P>Meu Carrinho</P>
       </Header>
-      <div>
-        <p>Endereço de entrega</p>
-        <h4>{address}</h4>
-      </div>
-      <div>Conteudo</div>
-      <form onSubmit={sendOrder}>
-        <h3>Formas de pagamento</h3>
-        <hr />
-        <input
-          type="radio"
-          id="money"
-          name="paymentMethod"
-          value="money"
-          onChange={handleInputChange}
-          checked={paymentMethod === 'money'}
-        ></input>
-        <label htmlFor="money">Dinheiro</label>
-        <br></br>
-        <input
-          type="radio"
-          id="creditcard"
-          name="paymentMethod"
-          value="creditcard"
-          onChange={handleInputChange}
-          checked={paymentMethod === 'creditcard'}
-        ></input>
-        <label htmlFor="creditcard">Cartão de credito</label>
-        <br></br>
-        <button>Confirmar</button>
-      </form>
+      <Payment>
+        <PaymentMethod>Forma de Pagamento</PaymentMethod>
+      </Payment>
+      <FormControl onSubmit={sendOrder}>
+        <CheckBoxContainer>
+          <InputCheck
+            type="radio"
+            id="money"
+            name="paymentMethod"
+            value="money"
+            onChange={handleInputChange}
+            checked={paymentMethod === 'money'}
+          />
+          <LabelCheckBox>Dinheiro</LabelCheckBox> <br />
+          <br />
+          <InputCheck
+            type="radio"
+            id="creditcard"
+            name="paymentMethod"
+            value="creditcard"
+            onChange={handleInputChange}
+            checked={paymentMethod === 'creditcard'}
+          />
+          <LabelCheckBox>Cartão de crédito</LabelCheckBox>
+          <Button
+            type="submit" //onClick={}
+          >
+            Confirmar
+          </Button>
+        </CheckBoxContainer>
+      </FormControl>
       <Footer />
     </Container>
   );
