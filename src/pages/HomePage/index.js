@@ -14,7 +14,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import labefood from 'services/labefood';
 import useProtectedPage from 'hooks/useProtectedPage';
-import { goToRestaurant } from 'routes/coordinator';
+import { goToSearch, goToRestaurant } from 'routes/coordinator';
 import { useHistory } from 'react-router-dom';
 import Footer from 'components/Footer';
 import {TextField} from "@material-ui/core";
@@ -69,6 +69,7 @@ function HomePage() {
       </Header>
       <div>
           <TextField
+            onClick={() => goToSearch(history)}
             id="outlined-basic"
             label="Restaurantes"
             variant="outlined"
