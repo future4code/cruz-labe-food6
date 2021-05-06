@@ -2,7 +2,7 @@ import React from 'react'
 import useForm from '../../hooks/useForm'
 import { Button, TextField } from '@material-ui/core';
 import {Container, InputContainer, P, ButtonEats, Header} from './styled'
-import { goToHome } from 'routes/coordinator';
+import { goToHome, goToLastPage } from 'routes/coordinator';
 import { useHistory } from 'react-router';
 import labefood from 'services/labefood';
 
@@ -45,7 +45,7 @@ function RegisterAdressPage() {
     return (
       <Container>
         <Header>
-            <img src={arrow}/>
+            <img src={arrow} onClick={() => goToLastPage(history)}/>
         </Header>
       <P>Meu Endereço</P>
       <InputContainer>

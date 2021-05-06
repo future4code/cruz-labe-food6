@@ -6,9 +6,12 @@ import { useParams } from 'react-router';
 import { GlobalStateContext } from 'global/GlobalStateContext';
 import { Container, Header, P, Subtitle, Restaurant, Img, Name, Category, Delivery, Shipping, Address, Product, PdtImg, PdtName, PdtPrice, PdtDescription, Button, Qtd } from './styled'
 import arrow from '../../assets/arrow.png'
+import { useHistory } from 'react-router';
+import { goToLastPage } from 'routes/coordinator';
 
 function RestaurantPage() {
   // useProtectedPage();
+  const history = useHistory();
   const { id } = useParams();
   const [details, setDetails] = useState({});
   const [loading, setLoading] = useState(true);
@@ -61,7 +64,7 @@ function RestaurantPage() {
   return (
     <Container>
       <Header>
-        <img src={arrow}/>
+        <img src={arrow} onClick={() => goToLastPage(history)}/>
         <P>Restaurante</P>
       </Header>
       <Restaurant>

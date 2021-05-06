@@ -6,7 +6,7 @@ import {TextField} from "@material-ui/core";
 import Search from "@material-ui/icons/Search";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { Container, Header, BoxCard, ImgBox, RestaurantName, ContainerInfos, InfoText } from './styled'
-import { goToRestaurant } from 'routes/coordinator';
+import { goToLastPage, goToRestaurant } from 'routes/coordinator';
 import arrow from '../../assets/arrow.png'
 
 function SearchPage() {
@@ -68,7 +68,7 @@ function SearchPage() {
   return (
     <Container>
       <Header>
-        <img src={arrow}/>
+        <img src={arrow} onClick={() => goToLastPage(history)}/>
         <p>Busca</p>
       </Header>
       <TextField

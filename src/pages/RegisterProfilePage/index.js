@@ -5,7 +5,7 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import labefood from '../../services/labefood'
 import useForm from '../../hooks/useForm'
 import {Container, InputContainer, Header, P, Img, ButtonEats} from './styled'
-import { goToRegisterAdress } from 'routes/coordinator';
+import { goToRegisterAdress, goToLastPage } from 'routes/coordinator';
 import logo from '../../assets/logo.png'
 import arrow from '../../assets/arrow.png'
 import {useHistory} from 'react-router-dom'
@@ -94,7 +94,7 @@ function RegisterProfilePage() {
     return (
       <Container>
          <Header>
-        <img src={arrow}/>
+        <img src={arrow} onClick={() => goToLastPage(history)}/>
         </Header>
       <Img src={logo}/>
       <P>Cadastrar</P>
