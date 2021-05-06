@@ -59,7 +59,7 @@ function AdressEditPage() {
     return (
       <Container>
            <Header>
-            <img src={arrow}/>
+            <img src={arrow} onClick={() => goToProfile(history)}/>
             <P>Endereço</P>
         </Header>
       

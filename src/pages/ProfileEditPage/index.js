@@ -91,7 +91,7 @@ function ProfileEditPage() {
     return (
       <Container>
         <Header>
-            <img src={arrow}/>
+            <img src={arrow} onClick={() => goToProfile(history)}/>
             <P>Editar</P>
         </Header>
       
