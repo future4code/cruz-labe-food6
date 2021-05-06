@@ -3,55 +3,58 @@ import { GlobalStateContext } from './GlobalStateContext';
 import React from 'react';
 
 export default function GlobalState(props) {
-  const carrinhoDetalhes = {
-    name: 'Habbibs',
-    address: 'Rua das Margaridas, 110 - Jardim das Flores',
-    shipping: '6',
-    restaurantId: 0,
-    produtos: [
-      {
-        id: 'q38byozxbUUidlVmpSXa',
-        name: 'Pastel',
-        description: '',
-        category: 'Pastel',
-        price: '3',
-        photoUrl:
-          'https://static-images.ifood.com.br/image/upload/f_auto,t_high/pratos/65c38aa8-b094-413d-9a80-ddc256bfcc78/201907031408_66194519.jpg',
-        quantity: '1',
-      },
-      {
-        id: 'po7B72myMyfKhtEe0mxv',
-        name: 'Kibe',
-        description: '',
-        category: 'Salgado',
-        price: '5,50',
-        photoUrl:
-          'https://static-images.ifood.com.br/image/upload/f_auto,t_high/pratos/65c38aa8-b094-413d-9a80-ddc256bfcc78/201907031407_66194536.jpg',
-        quantity: '2',
-      },
-    ],
+  const [carrinho, setCarrinho] = useState({});
+  const [products, setProducts] = useState([]);
+
+  const checaCarrinho = (restaurant) => {
+    if (carrinho && Object.keys(carrinho).length === 0) {
+      setCarrinho({
+        ...restaurant,
+      });
+      return true;
+    } else if (carrinho?.name === restaurant?.name) {
+      return true;
+    } else {
+      const excludeCart = window.confirm(
+        'Não é possivel adicionar comidas de diferentes restaurantes, você deseja excluir os items que estão no carrinho e adicionar esse?'
+      );
+      if (excludeCart) {
+        setCarrinho({
+          ...restaurant,
+        });
+        setProducts([]);
+        alert(
+          'Concluido! agora você pode adicionar os itens deste restaurante.'
+        );
+        return false;
+      } else {
+        return false;
+      }
+    }
   };
 
-  const [carrinho, setCarrinho] = useState(carrinhoDetalhes);
-
-  const adicionarAoCarrinho = (item) => {
-    const quantidade = Number(prompt('Qual a quantidade desejada?'));
-    const novaLista = [...carrinho.produtos, { ...item, quantity: quantidade }];
-    setCarrinho({ ...carrinho, produtos: novaLista });
+  const adicionarAoCarrinho = (item, restaurant) => {
+    if (checaCarrinho(restaurant)) {
+      const quantidade = Number(prompt('Qual a quantidade desejada?'));
+      if (quantidade) {
+        const novaLista = [...products, { ...item, quantity: quantidade }];
+        setProducts(novaLista);
+      }
+    }
   };
 
   const removerDoCarrinho = (id) => {
-    const carItem = carrinho?.produtos?.find((product) => product.id === id);
+    const carItem = products?.find((product) => product.id === id);
     if (!carItem) {
       return;
     }
     let novaLista;
-    if (carItem.quantity === 1) {
-      novaLista = carrinho.produtos.filter((product) => {
+    if (carItem.quantity < 2) {
+      novaLista = products.filter((product) => {
         return product.id !== id;
       });
     } else {
-      novaLista = carrinho.produtos.map((product) => {
+      novaLista = products.map((product) => {
         if (product.id === id) {
           const newProduct = {
             ...product,
@@ -62,11 +65,11 @@ export default function GlobalState(props) {
         return product;
       });
     }
-    setCarrinho({ ...carrinho, produtos: novaLista });
+    setProducts(novaLista);
   };
 
   const alterarCarrinho = (id, quantidade) => {
-    const novaLista = carrinho.produtos.map((product) => {
+    const novaLista = products.map((product) => {
       if (product.id === id) {
         const newProduct = {
           ...product,
@@ -76,15 +79,16 @@ export default function GlobalState(props) {
       }
       return product;
     });
-    setCarrinho({ ...carrinho, produtos: novaLista });
+    setProducts(novaLista);
   };
 
-  const context = [
+  const context = {
     carrinho,
+    products,
     adicionarAoCarrinho,
     removerDoCarrinho,
     alterarCarrinho,
-  ];
+  };
 
   return (
     <GlobalStateContext.Provider value={context}>

@@ -1,20 +1,22 @@
 import React, { useState, useEffect, useContext } from 'react';
 import useProtectedPage from 'hooks/useProtectedPage';
+import Footer from 'components/Footer';
 import labefood from 'services/labefood';
 import { useParams } from 'react-router';
 import { GlobalStateContext } from 'global/GlobalStateContext';
 
 function RestaurantPage() {
-  useProtectedPage();
+  // useProtectedPage();
   const { id } = useParams();
   const [details, setDetails] = useState({});
   const [loading, setLoading] = useState(true);
-  const [
+  const {
     carrinho,
+    products,
     adicionarAoCarrinho,
     removerDoCarrinho,
     alterarCarrinho,
-  ] = useContext(GlobalStateContext);
+  } = useContext(GlobalStateContext);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -45,7 +47,7 @@ function RestaurantPage() {
   }
 
   const filteredProducts = details?.products?.map((product) => {
-    const cartProduct = carrinho?.produtos.find((item) => {
+    const cartProduct = products?.find((item) => {
       return item.id === product.id;
     });
     if (cartProduct) {
@@ -84,7 +86,7 @@ function RestaurantPage() {
                   </span>
                 </>
               ) : (
-                <button onClick={() => adicionarAoCarrinho(product)}>
+                <button onClick={() => adicionarAoCarrinho(product, details)}>
                   Adicionar
                 </button>
               )}
@@ -111,13 +113,14 @@ function RestaurantPage() {
                   </span>
                 </>
               ) : (
-                <button onClick={() => adicionarAoCarrinho(product)}>
+                <button onClick={() => adicionarAoCarrinho(product, details)}>
                   Adicionar
                 </button>
               )}
             </div>
           );
         })}
+      <Footer />
     </div>
   );
 }

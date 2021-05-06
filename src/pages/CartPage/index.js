@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
   Container,
   P,
@@ -11,29 +11,22 @@ import {
   PaymentMethod,
   BoxInfo,
   InfoAddress,
-  Title} from './styled'
-import FormControl from "@material-ui/core/FormControl";
+  Title,
+} from './styled';
+import FormControl from '@material-ui/core/FormControl';
 import useProtectedPage from 'hooks/useProtectedPage';
 import Footer from 'components/Footer';
 import labefood from 'services/labefood';
+import { GlobalStateContext } from 'global/GlobalStateContext';
 
 function CartPage() {
   useProtectedPage();
   const [loading, setLoading] = useState(true);
   const [address, setAddress] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
-  const products = {
-    products: [
-      {
-        id: '3vcYYSOEf8dKeTPd7vHe',
-        quantity: 10,
-      },
-      {
-        quantity: 1,
-        id: '5omTFSOBYiTqeiDwhiBx',
-      },
-    ],
-  };
+  const { carrinho, products, removerDoCarrinho, alterarCarrinho } = useContext(
+    GlobalStateContext
+  );
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -42,7 +35,9 @@ function CartPage() {
       .then((response) => {
         setAddress(response.user.address);
       })
-      .catch((err) => {})
+      .catch((err) => {
+        alert('Falha ao adquirir seu endereço');
+      })
       .finally(() => {
         setLoading(false);
       });
@@ -54,9 +49,15 @@ function CartPage() {
 
   const sendOrder = (e) => {
     e.preventDefault();
+    const productsList = products.map((produto) => {
+      return {
+        id: produto.id,
+        quantity: produto.quantity,
+      };
+    });
     const token = localStorage.getItem('token');
     const order = {
-      ...products,
+      products: productsList,
       paymentMethod: paymentMethod,
     };
     labefood
@@ -69,6 +70,15 @@ function CartPage() {
       });
   };
 
+  const alterarCarrinhoAux = (id) => {
+    const quantidade = Number(prompt('Digite a quantidade nova'));
+    if (isNaN(quantidade)) {
+      alert('Numero invalido');
+      return;
+    }
+    alterarCarrinho(id, quantidade);
+  };
+
   if (loading) {
     return <h1>Loading...</h1>;
   }
@@ -79,17 +89,62 @@ function CartPage() {
         <P>Meu Carrinho</P>
       </Header>
       <BoxInfo>
-          <Title>Endereço de entrega</Title>
-          <InfoAddress>
-             Cidade: 
-             SP <br />
-            Rua/Bairro
-          </InfoAddress>
-        </BoxInfo>
+        <Title>Endereço de entrega</Title>
+        <InfoAddress>{address}</InfoAddress>
+      </BoxInfo>
+      <div>
+        {products?.length > 0 ? (
+          <>
+            <div>
+              <p>{carrinho.name}</p>
+              <p>{carrinho.address}</p>
+              <p>
+                {carrinho.deliveryTime - 5} - {carrinho.deliveryTime + 5} min
+              </p>
+            </div>
+            <div>
+              {products?.map((produto) => {
+                return (
+                  <article key={produto.id}>
+                    <img height="100" src={produto.photoUrl} />
+                    <span>{produto.name}</span>
+                    <span>{produto.description}</span>
+                    <span>R$ {produto.price * produto.quantity}</span>
+                    <span onClick={() => alterarCarrinhoAux(produto.id)}>
+                      Quantidade: {produto.quantity}
+                    </span>
+                    <button onClick={() => removerDoCarrinho(produto.id)}>
+                      Remover
+                    </button>
+                  </article>
+                );
+              })}
+            </div>
+          </>
+        ) : (
+          <p>Carrinho Vazio</p>
+        )}
+        <div>
+          <span>Subtotal </span>
+          <span>Frete: R${products ? carrinho.shipping : 0}</span>
+          <span>
+            Valor: R$
+            {products
+              ? products.reduce((acc, currentValue) => {
+                  let price = currentValue.price;
+                  if (typeof price !== 'number') {
+                    price = Number(currentValue.price.replace(',', '.'));
+                  }
+                  return acc + price * currentValue.quantity;
+                }, 0)
+              : 0}
+          </span>
+        </div>
+      </div>
       <Payment>
         <PaymentMethod>Forma de Pagamento</PaymentMethod>
       </Payment>
-      <FormControl onSubmit={sendOrder}>
+      <FormControl>
         <CheckBoxContainer>
           <InputCheck
             type="radio"
@@ -110,9 +165,7 @@ function CartPage() {
             checked={paymentMethod === 'creditcard'}
           />
           <LabelCheckBox>Cartão de crédito</LabelCheckBox>
-          <Button
-            type="submit" //onClick={}
-          >
+          <Button type="submit" onClick={sendOrder}>
             Confirmar
           </Button>
         </CheckBoxContainer>
