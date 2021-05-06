@@ -7,7 +7,9 @@ import {
   RestaurantName,
   ContainerInfos,
   InfoText,
-  P
+  P,
+  Carousel,
+  CarouselContainer
 } from "./styled";
 import React, { useEffect, useState } from 'react';
 import labefood from 'services/labefood';
@@ -82,15 +84,15 @@ function HomePage() {
             }}
           />
         </div>
-      <div>
+      <CarouselContainer>
         {categories.map((category) => {
           return (
-            <button key={category} onClick={() => setCategoryFilter(category)}>
+            <Carousel key={category} onClick={() => setCategoryFilter(category)}>
               {category}
-            </button>
+            </Carousel>
           );
         })}
-      </div>
+      </CarouselContainer>
 
       <BoxCard>
         {filteredRestaurants?.map((restaurant) => {
