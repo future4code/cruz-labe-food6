@@ -47,14 +47,6 @@ function HomePage() {
     setLoading(false);
   }, []);
 
-  const mystyle = {
-    backgroundColor: 'DodgerBlue',
-    padding: '10px',
-    margin: '10px',
-    border: '1px solid black',
-    width: '300px',
-  };
-
   const filteredRestaurants = restaurants?.filter((restaurant) => {
     return restaurant.category === categoryFilter;
   });
