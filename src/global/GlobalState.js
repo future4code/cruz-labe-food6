@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { GlobalStateContext } from './GlobalStateContext';
 import labefood from 'services/labefood';
 import React from 'react';
-import ActiveOrderModal from 'components/ActiveOrderModal';
 
 export default function GlobalState(props) {
   const [carrinho, setCarrinho] = useState({});
@@ -129,15 +128,11 @@ export default function GlobalState(props) {
     alterarCarrinho,
     resetAll,
     setActiveOrder,
+    activeOrder,
   };
 
   return (
     <GlobalStateContext.Provider value={context}>
-      {activeOrder && Object.keys(activeOrder).length > 0 ? (
-        <ActiveOrderModal order={activeOrder} />
-      ) : (
-        <> </>
-      )}
       {props.children}
     </GlobalStateContext.Provider>
   );

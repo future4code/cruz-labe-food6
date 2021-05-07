@@ -11,7 +11,7 @@ import {
   Carousel,
   CarouselContainer,
 } from './styled';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import labefood from 'services/labefood';
 import useProtectedPage from 'hooks/useProtectedPage';
 import { goToSearch, goToRestaurant, goToLogout } from 'routes/coordinator';
@@ -21,6 +21,8 @@ import { TextField } from '@material-ui/core';
 import Search from '@material-ui/icons/Search';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Animation from 'components/Animation';
+import ActiveOrderModal from 'components/ActiveOrderModal';
+import { GlobalStateContext } from 'global/GlobalStateContext';
 
 function HomePage() {
   useProtectedPage();
@@ -28,6 +30,7 @@ function HomePage() {
   const [categoryFilter, setCategoryFilter] = useState('Hamburguer');
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState([]);
+  const { activeOrder } = useContext(GlobalStateContext);
   const history = useHistory();
 
   const filterCategories = (array) => {
@@ -118,6 +121,12 @@ function HomePage() {
           );
         })}
       </BoxCard>
+
+      {activeOrder && Object.keys(activeOrder).length > 0 ? (
+        <ActiveOrderModal order={activeOrder} />
+      ) : (
+        <> </>
+      )}
 
       <Footer />
     </Container>
