@@ -9,18 +9,18 @@ import {
   InfoText,
   P,
   Carousel,
-  CarouselContainer
-} from "./styled";
+  CarouselContainer,
+} from './styled';
 import React, { useEffect, useState } from 'react';
 import labefood from 'services/labefood';
 import useProtectedPage from 'hooks/useProtectedPage';
 import { goToSearch, goToRestaurant } from 'routes/coordinator';
 import { useHistory } from 'react-router-dom';
 import Footer from 'components/Footer';
-import {TextField} from "@material-ui/core";
-import Search from "@material-ui/icons/Search";
-import InputAdornment from "@material-ui/core/InputAdornment";
-
+import { TextField } from '@material-ui/core';
+import Search from '@material-ui/icons/Search';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Animation from 'components/Animation';
 
 function HomePage() {
   useProtectedPage();
@@ -59,7 +59,7 @@ function HomePage() {
   });
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return <Animation />;
   }
 
   return (
@@ -68,27 +68,31 @@ function HomePage() {
         <P>FutureEats</P>
       </Header>
       <div>
-          <TextField
-            onClick={() => goToSearch(history)}
-            id="outlined-basic"
-            label="Restaurantes"
-            variant="outlined"
-            type="text"
-            color="primary"
-            margin="normal"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Search style={{ color: "gray" }} />
-                </InputAdornment>
-              ),
-            }}
-          />
-        </div>
+        <TextField
+          onClick={() => goToSearch(history)}
+          id="outlined-basic"
+          label="Restaurantes"
+          variant="outlined"
+          type="text"
+          color="primary"
+          margin="normal"
+          fullWidth
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <Search style={{ color: 'gray' }} />
+              </InputAdornment>
+            ),
+          }}
+        />
+      </div>
       <CarouselContainer>
         {categories.map((category) => {
           return (
-            <Carousel key={category} onClick={() => setCategoryFilter(category)}>
+            <Carousel
+              key={category}
+              onClick={() => setCategoryFilter(category)}
+            >
               {category}
             </Carousel>
           );
@@ -98,16 +102,18 @@ function HomePage() {
       <BoxCard>
         {filteredRestaurants?.map((restaurant) => {
           return (
-              <BoxInside  onClick={() => goToRestaurant(history, restaurant.id)}
+            <BoxInside
+              onClick={() => goToRestaurant(history, restaurant.id)}
               key={restaurant.id}
-              title={restaurant.description}>
-                <ImgBox src={restaurant.logoUrl} alt="restaurant" />
-                <RestaurantName>{restaurant.name}</RestaurantName>
-                  <ContainerInfos>
-                  <InfoText>{restaurant.deliveryTime} min</InfoText>
-                  <InfoText>Frete R${restaurant.shipping}</InfoText>
-                  </ContainerInfos>
-              </BoxInside>
+              title={restaurant.description}
+            >
+              <ImgBox src={restaurant.logoUrl} alt="restaurant" />
+              <RestaurantName>{restaurant.name}</RestaurantName>
+              <ContainerInfos>
+                <InfoText>{restaurant.deliveryTime} min</InfoText>
+                <InfoText>Frete R${restaurant.shipping}</InfoText>
+              </ContainerInfos>
+            </BoxInside>
           );
         })}
       </BoxCard>

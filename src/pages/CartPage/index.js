@@ -33,15 +33,20 @@ import useProtectedPage from 'hooks/useProtectedPage';
 import Footer from 'components/Footer';
 import labefood from 'services/labefood';
 import { GlobalStateContext } from 'global/GlobalStateContext';
+import Animation from 'components/Animation';
 
 function CartPage() {
   useProtectedPage();
   const [loading, setLoading] = useState(true);
   const [address, setAddress] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
-  const { carrinho, products, removerDoCarrinho, alterarCarrinho } = useContext(
-    GlobalStateContext
-  );
+  const {
+    carrinho,
+    products,
+    removerDoCarrinho,
+    alterarCarrinho,
+    resetAll,
+  } = useContext(GlobalStateContext);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -76,12 +81,13 @@ function CartPage() {
       paymentMethod: paymentMethod,
     };
     labefood
-      .placeOrder(order, token, 1)
+      .placeOrder(order, token, carrinho.id)
       .then((response) => {
+        resetAll();
         console.log(response);
       })
       .catch((err) => {
-        console.log(err.response.data.message);
+        alert(err.response.data.message);
       });
   };
 
@@ -95,7 +101,7 @@ function CartPage() {
   };
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return <Animation />;
   }
 
   return (
@@ -123,7 +129,9 @@ function CartPage() {
                   <Product key={produto.id}>
                     <PdtImg height="100" src={produto.photoUrl} />
                     <PdtName>{produto.name}</PdtName>
-                    <PdtPrice>R${produto.price.toFixed(2) * produto.quantity}</PdtPrice>
+                    <PdtPrice>
+                      R${produto.price.toFixed(2) * produto.quantity}
+                    </PdtPrice>
                     <PdtDescription>{produto.description}</PdtDescription>
                     <Qtd onClick={() => alterarCarrinhoAux(produto.id)}>
                       <p>{produto.quantity}</p>
@@ -142,23 +150,23 @@ function CartPage() {
           </CarrinhoVazio>
         )}
         <div>
-        <Frete>
-          <p>Frete: R${products ? carrinho.shipping : 0}</p>
-        </Frete>
-        <SubTotal>
-        <p>SUBTOTAL </p>
-            <strong>R$
-            {products
-              ? products.reduce((acc, currentValue) => {
-                  let price = currentValue.price;
-                  if (typeof price !== 'number') {
-                    price = Number(currentValue.price.replace(',', '.'));
-                  }
-                  return acc + price * currentValue.quantity.toFixed(2);
-                }, 0)
-              : 0}
-              </strong>
-            
+          <Frete>
+            <p>Frete: R${products ? carrinho.shipping : 0}</p>
+          </Frete>
+          <SubTotal>
+            <p>SUBTOTAL </p>
+            <strong>
+              R$
+              {products
+                ? products.reduce((acc, currentValue) => {
+                    let price = currentValue.price;
+                    if (typeof price !== 'number') {
+                      price = Number(currentValue.price.replace(',', '.'));
+                    }
+                    return acc + price * currentValue.quantity.toFixed(2);
+                  }, 0)
+                : 0}
+            </strong>
           </SubTotal>
         </div>
       </div>

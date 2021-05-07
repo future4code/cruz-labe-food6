@@ -1,16 +1,45 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { GlobalStateContext } from './GlobalStateContext';
+import labefood from 'services/labefood';
 import React from 'react';
+import ActiveOrderModal from 'components/ActiveOrderModal';
 
 export default function GlobalState(props) {
   const [carrinho, setCarrinho] = useState({});
   const [products, setProducts] = useState([]);
+  const [activeOrder, setActiveOrder] = useState({});
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const carrinhoStore = localStorage.getItem('carrinho');
+      const productsStore = localStorage.getItem('products');
+      if (carrinhoStore && productsStore) {
+        setCarrinho(JSON.parse(carrinhoStore));
+        setProducts(JSON.parse(productsStore));
+      }
+      labefood
+        .getActiveOrder(token)
+        .then((response) => {
+          setActiveOrder(response.order);
+        })
+        .catch((err) => {
+          alert(err.response.data.message);
+        });
+    }
+  }, []);
+
+  const resetAll = () => {
+    setCarrinho({});
+    setProducts([]);
+  };
 
   const checaCarrinho = (restaurant) => {
     if (carrinho && Object.keys(carrinho).length === 0) {
       setCarrinho({
         ...restaurant,
       });
+      localStorage.setItem('carrinho', JSON.stringify(restaurant));
       return true;
     } else if (carrinho?.name === restaurant?.name) {
       return true;
@@ -19,10 +48,10 @@ export default function GlobalState(props) {
         'Não é possivel adicionar comidas de diferentes restaurantes, você deseja excluir os items que estão no carrinho e adicionar esse?'
       );
       if (excludeCart) {
-        setCarrinho({
-          ...restaurant,
-        });
+        setCarrinho({});
         setProducts([]);
+        localStorage.removeItem('products');
+        localStorage.removeItem('carrinho');
         alert(
           'Concluido! agora você pode adicionar os itens deste restaurante.'
         );
@@ -38,6 +67,7 @@ export default function GlobalState(props) {
       const quantidade = Number(prompt('Qual a quantidade desejada?'));
       if (quantidade) {
         const novaLista = [...products, { ...item, quantity: quantidade }];
+        localStorage.setItem('products', JSON.stringify(novaLista));
         setProducts(novaLista);
       }
     }
@@ -65,7 +95,15 @@ export default function GlobalState(props) {
         return product;
       });
     }
-    setProducts(novaLista);
+    if (novaLista.length === 0) {
+      localStorage.removeItem('carrinho');
+      localStorage.removeItem('products');
+      setCarrinho({});
+      setProducts([]);
+    } else {
+      localStorage.setItem('products', JSON.stringify(novaLista));
+      setProducts(novaLista);
+    }
   };
 
   const alterarCarrinho = (id, quantidade) => {
@@ -79,6 +117,7 @@ export default function GlobalState(props) {
       }
       return product;
     });
+    localStorage.setItem('products', JSON.stringify(novaLista));
     setProducts(novaLista);
   };
 
@@ -88,10 +127,16 @@ export default function GlobalState(props) {
     adicionarAoCarrinho,
     removerDoCarrinho,
     alterarCarrinho,
+    resetAll,
   };
 
   return (
     <GlobalStateContext.Provider value={context}>
+      {activeOrder && Object.keys(activeOrder).length > 0 ? (
+        <ActiveOrderModal order={activeOrder} />
+      ) : (
+        <> </>
+      )}
       {props.children}
     </GlobalStateContext.Provider>
   );
