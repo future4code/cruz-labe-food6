@@ -20,7 +20,13 @@ export default function GlobalState(props) {
       labefood
         .getActiveOrder(token)
         .then((response) => {
-          setActiveOrder(response.order);
+          if (response.order && new Date().getTime() > response.order.expiresAt) {
+            setActiveOrder({})
+          }
+          else {
+            setActiveOrder(response.order);
+            setTimeout(() => {setActiveOrder({})}, response.order.expiresAt - new Date().getTime())
+          }
         })
         .catch((err) => {
           alert(err.response.data.message);
