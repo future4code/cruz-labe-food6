@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import useProtectedPage from 'hooks/useProtectedPage';
 import Footer from 'components/Footer';
 import labefood from 'services/labefood';
 import { useParams } from 'react-router';
 import { GlobalStateContext } from 'global/GlobalStateContext';
-import { Container, Header, P, Subtitle, Restaurant, Img, Name, Category, Delivery, Shipping, Address, Product, PdtImg, PdtName, PdtPrice, PdtDescription, Button, Qtd } from './styled'
+import { Container, Header, P, Subtitle, Restaurant, Img, Name, Category, Delivery, Shipping, Address, Product, PdtImg, PdtName, PdtPrice, PdtDescription, Button, Qtd, WhiteDiv } from './styled'
 import arrow from '../../assets/arrow.png'
 import { useHistory } from 'react-router';
 import { goToLastPage } from 'routes/coordinator';
@@ -16,7 +15,6 @@ function RestaurantPage() {
   const [details, setDetails] = useState({});
   const [loading, setLoading] = useState(true);
   const {
-    carrinho,
     products,
     adicionarAoCarrinho,
     removerDoCarrinho,
@@ -134,6 +132,8 @@ function RestaurantPage() {
             </Product>
           );
         })}
+        <WhiteDiv>
+        </WhiteDiv>
       <Footer />
     </Container>
   );

@@ -1,6 +1,6 @@
 import React from 'react'
 import useForm from '../../hooks/useForm'
-import { Button, TextField } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import {Container, InputContainer, P, ButtonEats, Header} from './styled'
 import { goToHome, goToLastPage } from 'routes/coordinator';
 import { useHistory } from 'react-router';

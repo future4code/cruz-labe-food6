@@ -76,3 +76,7 @@ export const Address = styled.div`
   font-size: 16px;
   font-family: -apple-system, Roboto,"Open Sans", sans-serif;
 `;
+
+export const WhiteDiv = styled.div`
+  height: 4rem;
+`

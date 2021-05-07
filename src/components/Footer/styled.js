@@ -4,7 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 
 export const AppFooter = styled(AppBar)`
   height: 3rem;
-  margin-top: 593px;
+  margin-top: 620px;
   position: fixed;
   background-color: #fafafa;
   color: black;

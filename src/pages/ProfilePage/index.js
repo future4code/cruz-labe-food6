@@ -3,7 +3,7 @@ import useProtectedPage from 'hooks/useProtectedPage';
 import labefood from 'services/labefood';
 import CardHistoric from 'components/CardHistorico';
 import CreateOutlinedIcon from "@material-ui/icons/CreateOutlined";
-import {ProfileContainer, IconEdit, Container, Header, P, P1, AddressContainer, Title, Address} from './styled'
+import {ProfileContainer, IconEdit, Container, Header, P, P1, AddressContainer, Title, Address, WhiteDiv} from './styled'
 import { goToEditAdress, goToEditProfile } from 'routes/coordinator';
 import { useHistory } from 'react-router';
 import Footer from 'components/Footer';
@@ -66,6 +66,8 @@ function ProfilePage() {
       }
       {}
       {!user && <h1>Loading</h1>}
+      <WhiteDiv>
+      </WhiteDiv>
       <Footer/>
     </Container>)
   }

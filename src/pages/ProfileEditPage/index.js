@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import useForm from '../../hooks/useForm'
-import { Button, TextField } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import {Container, InputContainer, P, ButtonEats, Header} from './styled'
 import arrow from '../../assets/arrow.png'
 import useProtectedPage from 'hooks/useProtectedPage';
