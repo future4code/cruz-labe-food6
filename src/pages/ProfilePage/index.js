@@ -8,6 +8,7 @@ import {
   IconEdit,
   Container,
   Header,
+  Button,
   P,
   P1,
   AddressContainer,
@@ -15,7 +16,7 @@ import {
   Address,
   WhiteDiv,
 } from './styled';
-import { goToEditAdress, goToEditProfile } from 'routes/coordinator';
+import { goToEditAdress, goToEditProfile, goToLogout } from 'routes/coordinator';
 import { useHistory } from 'react-router';
 import Footer from 'components/Footer';
 import Animation from 'components/Animation';
@@ -54,6 +55,7 @@ function ProfilePage() {
       <Header>
         <P>Meu Perfil</P>
       </Header>
+      
       {user && (
         <div>
           <ProfileContainer>
@@ -72,7 +74,7 @@ function ProfilePage() {
               <CreateOutlinedIcon onClick={() => goToEditAdress(history)} />
             </IconEdit>
           </AddressContainer>
-
+          <Button onClick={() => goToLogout(history)}>Sair</Button>
           <div>
             <P>Historico de Pedidos</P>
             <hr />
