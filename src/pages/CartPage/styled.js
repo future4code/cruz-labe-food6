@@ -72,7 +72,7 @@ export const Button = styled.button`
   justify-content: center;
   font-weight: bold;
   align-items: center;
-  font-family: -apple-system, Roboto, 'Open Sans', sans-serif;
+  font-family: 'Roboto', 'Open Sans', sans-serif;
   font-size: 16px;
   letter-spacing: -0.39px;
   text-align: center;
@@ -94,7 +94,7 @@ export const BoxInfo = styled.div`
   max-width: 100vw;
   background-color: #eeeeee;
   padding: 0.75rem 1rem;
-  font-family: -apple-system, Roboto, 'Open Sans', sans-serif;
+  font-family: 'Roboto', 'Open Sans', sans-serif;
   display: flex;
   flex-direction: column;
   gap: 10px;

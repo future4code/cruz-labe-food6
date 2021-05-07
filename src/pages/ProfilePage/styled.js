@@ -31,6 +31,25 @@ border-bottom: solid 1px #E8E8E8;
 justify-content: center;
 `
 
+export const Button = styled.button`
+  width: 90%;
+  height: 42px;
+  border-radius: 2px;
+  background-color: #e02020;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  align-items: center;
+  font-family: 'Roboto', 'Open Sans', sans-serif;
+  font-size: 16px;
+  letter-spacing: -0.39px;
+  text-align: center;
+  margin-left: 1rem;
+  margin-top: 1.5rem;
+  border: 0;
+`;
+
 export const ProfileContainer = styled.div`
   span {
     display: flex;
