@@ -30,7 +30,7 @@ function RegisterProfilePage() {
   };
   const [showPassword, setShowPassword] = useState(false);
   const history = useHistory();
-  const [form, handleInputChange, setForm] = useForm(registerProfileForm);
+  const [form, handleInputChange, resetForm, setForm] = useForm(registerProfileForm);
 
   const createProfile = (event) => {
     event.preventDefault();
