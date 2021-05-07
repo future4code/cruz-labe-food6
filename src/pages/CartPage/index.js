@@ -46,6 +46,7 @@ function CartPage() {
     removerDoCarrinho,
     alterarCarrinho,
     resetAll,
+    setActiveOrder,
   } = useContext(GlobalStateContext);
 
   useEffect(() => {
@@ -83,6 +84,7 @@ function CartPage() {
     labefood
       .placeOrder(order, token, carrinho.id)
       .then((response) => {
+        setActiveOrder(response);
         resetAll();
         console.log(response);
       })
