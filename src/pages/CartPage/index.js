@@ -88,7 +88,6 @@ function CartPage() {
       .then((response) => {
         setActiveOrder(response);
         resetAll();
-        console.log(response);
         window.location.reload()
       })
       .catch((err) => {

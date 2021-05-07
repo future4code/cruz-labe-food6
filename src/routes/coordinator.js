@@ -43,6 +43,6 @@ export const goToLastPage = (history) => {
 }
 
 export const goToLogout = (history) => {
-    localStorage.removeItem("token")
+    localStorage.clear()
     history.replace("/login")
 }
