@@ -12,8 +12,23 @@ import {
   BoxInfo,
   InfoAddress,
   Title,
+  Restaurant,
+  Name,
+  Delivery,
+  Address,
+  Product,
+  PdtImg,
+  PdtName,
+  PdtPrice,
+  PdtDescription,
+  Qtd,
+  CarrinhoVazio,
+  PdtButton,
+  SubTotal,
+  Frete,
 } from './styled';
 import FormControl from '@material-ui/core/FormControl';
+
 import useProtectedPage from 'hooks/useProtectedPage';
 import Footer from 'components/Footer';
 import labefood from 'services/labefood';
@@ -95,50 +110,56 @@ function CartPage() {
       <div>
         {products?.length > 0 ? (
           <>
-            <div>
-              <p>{carrinho.name}</p>
-              <p>{carrinho.address}</p>
-              <p>
+            <Restaurant>
+              <Name>{carrinho.name}</Name>
+              <Address>{carrinho.address}</Address>
+              <Delivery>
                 {carrinho.deliveryTime - 5} - {carrinho.deliveryTime + 5} min
-              </p>
-            </div>
+              </Delivery>
+            </Restaurant>
             <div>
               {products?.map((produto) => {
                 return (
-                  <article key={produto.id}>
-                    <img height="100" src={produto.photoUrl} />
-                    <span>{produto.name}</span>
-                    <span>{produto.description}</span>
-                    <span>R$ {produto.price * produto.quantity}</span>
-                    <span onClick={() => alterarCarrinhoAux(produto.id)}>
-                      Quantidade: {produto.quantity}
-                    </span>
-                    <button onClick={() => removerDoCarrinho(produto.id)}>
+                  <Product key={produto.id}>
+                    <PdtImg height="100" src={produto.photoUrl} />
+                    <PdtName>{produto.name}</PdtName>
+                    <PdtPrice>R${produto.price.toFixed(2) * produto.quantity}</PdtPrice>
+                    <PdtDescription>{produto.description}</PdtDescription>
+                    <Qtd onClick={() => alterarCarrinhoAux(produto.id)}>
+                      <p>{produto.quantity}</p>
+                    </Qtd>
+                    <PdtButton onClick={() => removerDoCarrinho(produto.id)}>
                       Remover
-                    </button>
-                  </article>
+                    </PdtButton>
+                  </Product>
                 );
               })}
             </div>
           </>
         ) : (
-          <p>Carrinho Vazio</p>
+          <CarrinhoVazio>
+            <p>Carrinho Vazio</p>
+          </CarrinhoVazio>
         )}
         <div>
-          <span>Subtotal </span>
-          <span>Frete: R${products ? carrinho.shipping : 0}</span>
-          <span>
-            Valor: R$
+        <Frete>
+          <p>Frete: R${products ? carrinho.shipping : 0}</p>
+        </Frete>
+        <SubTotal>
+        <p>SUBTOTAL </p>
+            <strong>R$
             {products
               ? products.reduce((acc, currentValue) => {
                   let price = currentValue.price;
                   if (typeof price !== 'number') {
                     price = Number(currentValue.price.replace(',', '.'));
                   }
-                  return acc + price * currentValue.quantity;
+                  return acc + price * currentValue.quantity.toFixed(2);
                 }, 0)
               : 0}
-          </span>
+              </strong>
+            
+          </SubTotal>
         </div>
       </div>
       <Payment>

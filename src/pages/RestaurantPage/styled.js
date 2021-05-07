@@ -221,3 +221,7 @@ export const Qtd = styled.div`
       color: #fff;
     }
 `
+
+export const WhiteDiv = styled.div`
+  height: 4rem;
+`
