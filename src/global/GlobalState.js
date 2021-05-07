@@ -20,12 +20,16 @@ export default function GlobalState(props) {
       labefood
         .getActiveOrder(token)
         .then((response) => {
-          if (response.order && new Date().getTime() > response.order.expiresAt) {
-            setActiveOrder({})
-          }
-          else {
+          if (
+            response.order &&
+            new Date().getTime() > response.order.expiresAt
+          ) {
+            setActiveOrder({});
+          } else {
             setActiveOrder(response.order);
-            setTimeout(() => {setActiveOrder({})}, response.order.expiresAt - new Date().getTime())
+            setTimeout(() => {
+              setActiveOrder({});
+            }, response.order.expiresAt - new Date().getTime());
           }
         })
         .catch((err) => {
@@ -37,6 +41,8 @@ export default function GlobalState(props) {
   const resetAll = () => {
     setCarrinho({});
     setProducts([]);
+    localStorage.removeItem('products');
+    localStorage.removeItem('carrinho');
   };
 
   const checaCarrinho = (restaurant) => {
