@@ -14,7 +14,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import labefood from 'services/labefood';
 import useProtectedPage from 'hooks/useProtectedPage';
-import { goToSearch, goToRestaurant } from 'routes/coordinator';
+import { goToSearch, goToRestaurant, goToLogout } from 'routes/coordinator';
 import { useHistory } from 'react-router-dom';
 import Footer from 'components/Footer';
 import { TextField } from '@material-ui/core';
@@ -66,6 +66,7 @@ function HomePage() {
     <Container>
       <Header>
         <P>FutureEats</P>
+        <button onClick={() => goToLogout(history)}>Logout</button>
       </Header>
       <div>
         <TextField

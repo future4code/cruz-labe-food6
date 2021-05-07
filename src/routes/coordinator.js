@@ -41,3 +41,8 @@ export const goToEditAdress = (history) => {
 export const goToLastPage = (history) => {
     history.goBack()
 }
+
+export const goToLogout = (history) => {
+    localStorage.removeItem("token")
+    history.replace("/login")
+}
