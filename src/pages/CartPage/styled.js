@@ -1,29 +1,27 @@
 import styled from 'styled-components';
 
-export const Container = styled.div `
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: auto;
   position: relative;
   font-family: 'Roboto', sans-serif;
+`;
 
-`
+export const P = styled.p`
+  color: black;
+  font-weight: bold;
+  text-align: center;
+`;
 
-export const P = styled.p `
-color: black;
-font-weight: bold;
-text-align: center;
-`
-
-
-export const Header = styled.div `
-display: flex;
-margin-top: 5px;
-width: 100vw;
-border-bottom: solid 1px #E8E8E8;
-justify-content: center;
-`
+export const Header = styled.div`
+  display: flex;
+  margin-top: 5px;
+  width: 100vw;
+  border-bottom: solid 1px #e8e8e8;
+  justify-content: center;
+`;
 export const Payment = styled.div`
   width: 90vw;
   border-bottom: 1px solid black;
@@ -31,13 +29,13 @@ export const Payment = styled.div`
 `;
 
 export const PaymentMethod = styled.p`
-    text-align: start;
-    margin-right:0;
-    font-weight: normal;
-    font-size: 1rem;
-    font-weight: 600;
-    text-align: center;
-`
+  text-align: start;
+  margin-right: 0;
+  font-weight: normal;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+`;
 
 export const SubTotalText = styled.p`
   font-weight: normal;
@@ -74,7 +72,7 @@ export const Button = styled.button`
   justify-content: center;
   font-weight: bold;
   align-items: center;
-  font-family: -apple-system, Roboto, "Open Sans",  sans-serif;
+  font-family: -apple-system, Roboto, 'Open Sans', sans-serif;
   font-size: 16px;
   letter-spacing: -0.39px;
   text-align: center;
@@ -83,21 +81,29 @@ export const Button = styled.button`
   border: 0;
 `;
 export const InputCheck = styled.input`
-margin-left: 1rem;
-`
+  margin-left: 1rem;
+`;
 
 export const BoxInfo = styled.div`
-  width: 100vw;
+  & * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  max-width: 100vw;
   background-color: #eeeeee;
-  height: auto;
+  padding: 0.75rem 1rem;
+  font-family: -apple-system, Roboto, 'Open Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
 `;
 
 export const Title = styled.p`
   color: #b8b8b8;
-  text-align: start;
-  margin-left: 1rem;
-  margin-bottom: 0;
-  font-family: -apple-system, Roboto, "Open Sans",  sans-serif;
 `;
 
 export const InfoAddress = styled.p`
@@ -107,24 +113,24 @@ export const InfoAddress = styled.p`
 `;
 
 export const Restaurant = styled.div`
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-    grid-template-areas:
-        "img img img"
-        "img img img"
-        "img img img"
-        "img img img"
-        "nme nme nme"
-        "cat cat cat"
-        "dlv shi shi"
-        "adr adr adr";
-    height: 5.500rem;
-    width: 90%;
-    border-radius: 8px;
-    margin-top: 3.75rem;
-    margin: 5px auto;
-`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  grid-template-areas:
+    'img img img'
+    'img img img'
+    'img img img'
+    'img img img'
+    'nme nme nme'
+    'cat cat cat'
+    'dlv shi shi'
+    'adr adr adr';
+  height: 5.5rem;
+  width: 90%;
+  border-radius: 8px;
+  margin-top: 3.75rem;
+  margin: 5px auto;
+`;
 
 export const Name = styled.div`
   grid-area: nme;
@@ -173,9 +179,9 @@ export const Product = styled.div`
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(2, 2.5rem) 2rem;
   grid-template-areas:
-    "img img img nme nme nme nme nme nme qtd"
-    "img img img des des des des des des des"
-    "img img img brl brl ... ... btn btn btn";
+    'img img img nme nme nme nme nme nme qtd'
+    'img img img des des des des des des des'
+    'img img img brl brl ... ... btn btn btn';
   width: 90%;
   border-radius: 8px;
   border: solid 1px #b8b8b8;
@@ -206,7 +212,6 @@ export const PdtName = styled.div`
   margin-left: 1rem;
 `;
 
-
 export const PdtDescription = styled.div`
   grid-area: des;
   display: flex;
@@ -235,10 +240,10 @@ export const Qtd = styled.div`
   text-align: center;
 
   p {
-      margin-top: 7px;
-      font-weight: bold;
+    margin-top: 7px;
+    font-weight: bold;
   }
-`
+`;
 
 export const PdtButton = styled.div`
   color: #e02020;
@@ -256,7 +261,7 @@ export const PdtButton = styled.div`
 
 export const CarrinhoVazio = styled.div`
   text-align: center;
-`
+`;
 
 export const Frete = styled.div`
   display: flex;

@@ -2,12 +2,21 @@ import useProtectedPage from 'hooks/useProtectedPage';
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import labefood from 'services/labefood';
-import {TextField} from "@material-ui/core";
-import Search from "@material-ui/icons/Search";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import { Container, Header, BoxCard, ImgBox, RestaurantName, ContainerInfos, InfoText } from './styled'
+import { TextField } from '@material-ui/core';
+import Search from '@material-ui/icons/Search';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import {
+  Container,
+  Header,
+  BoxCard,
+  ImgBox,
+  RestaurantName,
+  ContainerInfos,
+  InfoText,
+} from './styled';
 import { goToLastPage, goToRestaurant } from 'routes/coordinator';
-import arrow from '../../assets/arrow.png'
+import arrow from '../../assets/arrow.png';
+import Animation from 'components/Animation';
 
 function SearchPage() {
   useProtectedPage();
@@ -44,16 +53,18 @@ function SearchPage() {
     })
     ?.map((restaurant) => {
       return (
-        <BoxCard onClick={() => goToRestaurant(history, restaurant.id)}
-        key={restaurant.id}  title={restaurant.description}>
+        <BoxCard
+          onClick={() => goToRestaurant(history, restaurant.id)}
+          key={restaurant.id}
+          title={restaurant.description}
+        >
           <ImgBox width="300" src={restaurant.logoUrl} alt="restaurant" />
           <RestaurantName>{restaurant.name}</RestaurantName>
-              <ContainerInfos>
-              <InfoText>{restaurant.deliveryTime} min</InfoText>
-              <InfoText>Frete R${restaurant.shipping}</InfoText>
-              </ContainerInfos>
-          </BoxCard>
-          
+          <ContainerInfos>
+            <InfoText>{restaurant.deliveryTime} min</InfoText>
+            <InfoText>Frete R${restaurant.shipping}</InfoText>
+          </ContainerInfos>
+        </BoxCard>
       );
     });
 
@@ -62,13 +73,13 @@ function SearchPage() {
   };
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return <Animation />;
   }
 
   return (
     <Container>
       <Header>
-        <img src={arrow} onClick={() => goToLastPage(history)}/>
+        <img src={arrow} onClick={() => goToLastPage(history)} />
         <p>Busca</p>
       </Header>
       <TextField
@@ -85,7 +96,7 @@ function SearchPage() {
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <Search style={{ color: "gray" }} />
+              <Search style={{ color: 'gray' }} />
             </InputAdornment>
           ),
         }}
