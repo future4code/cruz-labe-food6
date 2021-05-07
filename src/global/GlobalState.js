@@ -128,6 +128,7 @@ export default function GlobalState(props) {
     removerDoCarrinho,
     alterarCarrinho,
     resetAll,
+    setActiveOrder,
   };
 
   return (
