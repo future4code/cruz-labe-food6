@@ -8,6 +8,7 @@ export const CardContainer = styled.div`
   margin-left: 1rem;
   margin-bottom: 10px;
   margin-top: 8px;
+  font-family: 'Roboto', "Open Sans",sans-serif;
 `;
 
 export const InfoContainer = styled.div`
@@ -15,7 +16,6 @@ export const InfoContainer = styled.div`
 `;
 
 export const NameProduct = styled.p`
-  font-family: -apple-system, Roboto, "Open Sans",sans-serif;
   color: #5cb646;
   margin: 10px 0 6px 0;
   font-size: 1rem;
@@ -25,7 +25,6 @@ export const NameProduct = styled.p`
 
 export const TitleProduct = styled.p`
   color: #000;
-  font-family: -apple-system, Roboto, "Open Sans",sans-serif;
   font-size: 0.875rem;
   margin-left: 1rem;
 `;
@@ -36,3 +35,13 @@ export const PriceProduct = styled.p`
   font-weight: bold;
   margin-left: 1rem;
 `;
+
+export const P = styled.div`
+  text-align: center;
+  font-family: 'Roboto', "Open Sans",sans-serif;
+
+  p {
+    font-weight: bold;
+    font-size: 18px;
+  }
+`

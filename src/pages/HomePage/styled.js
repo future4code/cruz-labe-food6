@@ -25,7 +25,7 @@ export const RestaurantName = styled.p`
   display: flex;
   justify-content: flex-start;
   padding-top: 8px;
-  font-family: -apple-system, Roboto, 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #5cb646;
   font-size: 1rem;
   margin: 0;
@@ -42,7 +42,7 @@ export const InfoText = styled.p`
   font-size: 1rem;
   color: #b8b8b8;
   margin: 5px 0 0 0;
-  font-family: -apple-system, Roboto, 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
 `;
 
 export const AllContainer = styled.div`

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom'
 import {
   Container,
   P,
@@ -37,6 +38,7 @@ import Animation from 'components/Animation';
 
 function CartPage() {
   useProtectedPage();
+  const history = useHistory()
   const [loading, setLoading] = useState(true);
   const [address, setAddress] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
@@ -87,6 +89,7 @@ function CartPage() {
         setActiveOrder(response);
         resetAll();
         console.log(response);
+        window.location.reload()
       })
       .catch((err) => {
         alert(err.response.data.message);
@@ -201,6 +204,7 @@ function CartPage() {
           </Button>
         </CheckBoxContainer>
       </FormControl>
+      
       <Footer />
     </Container>
   );

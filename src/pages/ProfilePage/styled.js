@@ -6,20 +6,20 @@ export const Container = styled.div `
   justify-content: center;
   height: auto;
   position: relative;
-
+  font-family: 'Roboto', sans-serif;
 `
 
 export const P = styled.p `
 color: black;
 font-weight: bold;
 text-align: center;
-font-family: -apple-system, Roboto, "Open Sans", "Helvetica Neue", sans-serif;
+font-family: 'Roboto', sans-serif;
 `
 export const P1 = styled.p `
 color: black;
 font-weight: bold;
 margin-left: 1rem;
-font-family: -apple-system, Roboto, "Open Sans", "Helvetica Neue", sans-serif;
+font-family: 'Roboto', sans-serif;
 `
 
 
@@ -41,7 +41,7 @@ export const Button = styled.button`
   justify-content: center;
   font-weight: bold;
   align-items: center;
-  font-family: 'Roboto', 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 16px;
   letter-spacing: -0.39px;
   text-align: center;
@@ -54,7 +54,7 @@ export const ProfileContainer = styled.div`
   span {
     display: flex;
     flex-direction: column;
-    font-family: -apple-system, Roboto,"Open Sans", sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
     letter-spacing: -0.39px;
     margin-left: 16px;
@@ -83,7 +83,7 @@ export const AddressContainer = styled.div`
 
 export const Title = styled.p`
   font-size: 1rem;
-  font-family: -apple-system, Roboto,"Open Sans", sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #b8b8b8;
   margin: 0;
   padding-top: 16px;
@@ -93,7 +93,7 @@ export const Title = styled.p`
 export const Address = styled.div`
   margin-left: 1em;
   font-size: 16px;
-  font-family: -apple-system, Roboto,"Open Sans", sans-serif;
+  font-family: 'Roboto', sans-serif;
 `;
 
 export const WhiteDiv = styled.div`

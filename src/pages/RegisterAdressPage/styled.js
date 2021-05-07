@@ -6,7 +6,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 width: 100vw;
-font-family: Roboto, sans-serif;
+font-family: 'Roboto', sans-serif;
 
 `
 
@@ -35,7 +35,7 @@ font-weight: bold;
 export const ButtonEats = styled(Button) `
   width: 328px;
   height: 42px;
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
