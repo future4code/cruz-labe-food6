@@ -5,6 +5,7 @@ import {
   NameProduct,
   PriceProduct,
   TitleProduct,
+  P
 } from './styled';
 import Animation from 'components/Animation';
 
@@ -72,7 +73,9 @@ const CardHistoric = () => {
           );
         })}
       {historic && historic.length === 0 && (
-        <h1>Você não realizou nenhum pedido</h1>
+        <P>
+          <p>Você não realizou nenhum pedido</p>
+        </P>
       )}
     </div>
   );

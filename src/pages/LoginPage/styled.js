@@ -8,8 +8,7 @@ align-items: center;
 width: 100vw;
 height: 100%;
 margin-top: 10vh;
-font-family: Roboto, sans-serif;
-
+font-family: 'Roboto', sans-serif;
 `
 
 export const InputContainer = styled.div `
@@ -47,7 +46,7 @@ margin-bottom: 30px;
 export const ButtonEats = styled(Button) `
   width: 328px;
   height: 42px;
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;

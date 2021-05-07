@@ -60,7 +60,7 @@ export const Img = styled.img`
 
 export const Name = styled.div`
   grid-area: nme;
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   font-weight: normal;
   font-stretch: normal;
@@ -74,7 +74,7 @@ export const Name = styled.div`
 `;
 
 export const Category = styled.div`
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   grid-area: cat;
   display: flex;
   align-items: center;
@@ -88,7 +88,7 @@ export const Category = styled.div`
 `;
 
 export const Delivery = styled.div`
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   grid-area: dlv;
   display: flex;
   align-items: center;
@@ -102,7 +102,7 @@ export const Delivery = styled.div`
 `;
 
 export const Shipping = styled.div`
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   grid-area: shi;
   display: flex;
   align-items: center;
@@ -116,7 +116,7 @@ export const Shipping = styled.div`
 `;
 
 export const Address = styled.div`
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   grid-area: adr;
   display: flex;
   align-items: center;
@@ -154,7 +154,7 @@ export const PdtImg = styled.img`
 
 export const PdtName = styled.div`
   grid-area: nme;
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   font-weight: normal;
   font-stretch: normal;
@@ -170,7 +170,7 @@ export const PdtName = styled.div`
 
 
 export const PdtDescription = styled.div`
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   grid-area: des;
   display: flex;
   align-items: center;
@@ -192,7 +192,7 @@ export const PdtPrice = styled.div`
 
 export const Button = styled.div`
   color: #5cb646;
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   grid-area: btn;
   border-top-left-radius: 8px;
   border-bottom-right-radius: 8px;
