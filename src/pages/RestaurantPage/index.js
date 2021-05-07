@@ -56,7 +56,7 @@ function RestaurantPage() {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [id]);
 
   const alterarCarrinhoAux = (id) => {
     const quantidade = Number(prompt('Digite a quantidade nova'));
@@ -84,7 +84,11 @@ function RestaurantPage() {
   return (
     <Container>
       <Header>
-        <img src={arrow} onClick={() => goToLastPage(history)} />
+        <img
+          src={arrow}
+          alt="navigation arrow"
+          onClick={() => goToLastPage(history)}
+        />
         <P>Restaurante</P>
       </Header>
       <Restaurant>

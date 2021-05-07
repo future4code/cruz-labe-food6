@@ -40,13 +40,6 @@ function SearchPage() {
       });
   }, []);
 
-  const mystyle = {
-    padding: '10px',
-    margin: '10px',
-    border: '1px solid black',
-    width: '300px',
-  };
-
   const filteredRestaurants = restaurants
     ?.filter((restaurant) => {
       return restaurant.name.toLowerCase().includes(searchQuery.toLowerCase());
@@ -79,7 +72,11 @@ function SearchPage() {
   return (
     <Container>
       <Header>
-        <img src={arrow} onClick={() => goToLastPage(history)} />
+        <img
+          src={arrow}
+          alt="navigation arrow"
+          onClick={() => goToLastPage(history)}
+        />
         <p>Busca</p>
       </Header>
       <TextField
@@ -87,7 +84,6 @@ function SearchPage() {
         type="text"
         label="Restaurantes"
         variant="outlined"
-        type="text"
         color="primary"
         margin="normal"
         value={searchQuery}
