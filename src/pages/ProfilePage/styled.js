@@ -53,7 +53,7 @@ export const IconEdit = styled.div`
 `;
 
 export const AddressContainer = styled.div`
-  width: 360px;
+  width: 100%;
   height: auto;
   margin-top: 16px;
   background-color: #eeeeee;
